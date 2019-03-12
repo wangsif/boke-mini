@@ -1,0 +1,89 @@
+body {
+  //避免将页面缩太小导致布局混乱
+  min-width: 1280px;
+  font-size: $font-size-default;
+  font-family: $font-default;
+  line-height: $line-height-base;
+  background-color: $background;
+  color: $text-color;
+}
+
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+h6, .h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+
+
+//Basic A Link Style
+
+a {
+  color: $link-color;
+  text-decoration: none;
+}
+
+
+//将display值语义化
+
+.hide{
+  display :none;
+}
+
+
+.inline-block {
+  display: inline-block;
+}
+
+
+//将float值语义化
+.right{
+  float: right;
+}
+
+.left{
+  float: left;
+}
+
+
+//将color值语义化
+.text-danger {
+  color: #f44336;
+}
+
+
+//将常用的mr值语义化
+.mr10{
+  margin-right: 10px;
+}
+
+
+//title类型的action样式风格
+.title-action{
+  float: right;
+  font-size: 14px;
+  color: #000;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+
