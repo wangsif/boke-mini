@@ -4,8 +4,6 @@ import context from 'app/context';
 import LoginForm from './form';
 import {message,Card} from 'antd';
 import Config from 'app/common';
-import {withRouter} from 'react-router';
-import md5 from 'md5'
 class LoginPage extends Component {
 
     constructor(props) {
@@ -14,8 +12,16 @@ class LoginPage extends Component {
     }
 
 
-    onSubmit() {
-
+    onSubmit(username,password) {
+        RestAPI.request(`/api/manager/admin/`+username+`/login`,{password},'GET',true)
+            .then(data =>{
+                Config.localItem(Config.localKey.userJwt,new Date().getTime());
+                Config.setUserInfo(data);
+                context.getBrowserHistory().push("/home")
+            })
+            .catch(function (error) {
+                message.error(error.message)
+            });
     }
 
     render() {
@@ -36,4 +42,4 @@ class LoginPage extends Component {
 
 }
 
-export default withRouter(LoginPage);
+export default LoginPage;

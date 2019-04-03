@@ -8,6 +8,11 @@ import Config from 'app/common';
 const {Header, Content, Footer, Sider} = Layout;
 const SubMenu = Menu.SubMenu;
 import {withRouter} from 'react-router';
+import Classify from '../../components/Container/page/InnerPage/classify/index'
+import UploadFile from '../../components/Container/page/InnerPage/upload/index'
+import QuestionDetail from '../../components/Container/page/InnerPage/questionDetail/index'
+import SetQuestion from '../../components/Container/page/InnerPage/setQuestion/index'
+import User from '../../components/Container/page/InnerPage/user/index'
 
 class ManagerCenter extends Component {
     state = {
@@ -67,6 +72,22 @@ class ManagerCenter extends Component {
             </div>
                     <Menu theme="dark" defaultSelectedKeys={['setMeal']} selectedKeys={selectMenu} mode="inline"
                           onSelect={this.sideBarClick}>
+                        <Menu.Item key="app/upload"><Icon type="inbox" /><span>上传试卷</span></Menu.Item>
+                        <Menu.Item key="app/classify"><Icon type="inbox" /><span>分类管理</span></Menu.Item>
+                        <Menu.Item key="app/QuestionDetail"><Icon type="inbox" /><span>题目管理</span></Menu.Item>
+                        <Menu.Item key="app/SetQuestion"><Icon type="inbox" /><span>套题小题管理</span></Menu.Item>
+                        <Menu.Item key="app/User"><Icon type ="inbox"/><span>用户管理</span></Menu.Item>
+                        {/*<SubMenu key="update" title={<span><Icon type="dot-chart" /><span>更新管理</span></span>}>*/}
+                            {/*<Menu.Item key="update/list"><Icon type="inbox" /><span>更新列表</span></Menu.Item>*/}
+                        {/*</SubMenu>*/}
+                        {/*<SubMenu key="version" title={<span><Icon type="tablet" /><span>版本管理</span></span>}>*/}
+                            {/*<Menu.Item key="version/list"><Icon type="tablet" /><span>版本列表</span></Menu.Item>*/}
+                        {/*</SubMenu>*/}
+                        {/*<SubMenu key="device" title={<span><Icon type="inbox" /><span>设备管理</span></span>}>*/}
+                            {/*<Menu.Item key="device/list"><Icon type="inbox" /><span>设备列表</span></Menu.Item>*/}
+                            {/*<Menu.Item key="device/log"><Icon type="inbox" /><span>设备更新记录</span></Menu.Item>*/}
+                            {/*<Menu.Item key="bDevice/list"><Icon type="inbox" /><span>灰度更新设备管理</span></Menu.Item>*/}
+                        {/*</SubMenu>*/}
                     </Menu>
                 </Sider>
                 <Layout style={{overflowY: 'hidden'}}>
@@ -98,9 +119,17 @@ class ManagerCenter extends Component {
                             height: contentHeight,
                             overflow: 'scroll'
                         }}>
+                        <Switch>
+                            <Route path={`${match.url}`} component={Classify} exact/>
+                            <Route path={`${match.url}/app/classify`} component={Classify}/>
+                            <Route path={`${match.url}/app/Upload`} component={UploadFile}/>
+                            <Route path={`${match.url}/app/QuestionDetail`} component={QuestionDetail}/>
+                            <Route path={`${match.url}/app/SetQuestion`} component={SetQuestion}/>
+                            <Route path={`${match.url}/app/User`} component={User}/>
+                        </Switch>
                     </Content>
                     <Footer style={{textAlign: 'center', padding: '0px'}}>
-                        ota-app-server Design ©2018 Created by KaoPuYun
+                        xiaozao-app-server Design ©2019 Created by KaoPuYun
                     </Footer>
                 </Layout>
             </Layout>
