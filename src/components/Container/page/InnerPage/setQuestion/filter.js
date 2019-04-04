@@ -43,14 +43,6 @@ class SetQuestionFilter extends Component {
                         <Input style={{width: '150px'}} placeholder="请输入所属套题ID"/>
                     )}
                   </FormItem>
-                 <FormItem label="所属试卷ID">
-                    {getFieldDecorator('paperIds', {
-                        initialValue: paperIds
-                    }
-                    )(
-                        <Input style={{width: '150px'}} placeholder="请输入所属试卷ID"/>
-                    )}
-                  </FormItem>
                  <FormItem label="关键字">
                     {getFieldDecorator('keyword', {
                         initialValue: keyword

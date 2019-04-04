@@ -59,7 +59,7 @@ class questionDetailAddModal extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        let {onCloseModal, show, editQuestionDetailData} = this.props;
+        let {onCloseModal, show, editQuestionDetailData,classify} = this.props;
         const {previewVisible, previewImage, fileList} = this.state;
         const opeartion = editQuestionDetailData ? '修改' : '添加';
         const btnValue = editQuestionDetailData ? '保存' : '添加';
@@ -139,13 +139,13 @@ class questionDetailAddModal extends Component {
                         )}
                     </FormItem>
 
-                    {/*<FormItem style={formItemClass} {...formItemLayout} label='所属试卷'>*/}
-                        {/*{getFieldDecorator('paperIds', {*/}
-                            {/*initialValue: paperIds*/}
-                        {/*})(*/}
-                            {/*<Input/>*/}
-                        {/*)}*/}
-                    {/*</FormItem>*/}
+                    {/*<FormItem style={formItemClass} {...formItemLayout} label='所属试卷'>
+                        {getFieldDecorator('paperIds', {
+                            initialValue: paperIds
+                        })(
+                            <Input/>
+                        )}
+                    </FormItem>*/}
                     <FormItem style={formItemClass} {...formItemLayout} label='分值'>
                         {getFieldDecorator('score', {
                             initialValue: score

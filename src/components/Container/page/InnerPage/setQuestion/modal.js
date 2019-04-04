@@ -92,13 +92,6 @@ class setQuestionAddModal extends Component {
                                 <Input/>
                             )}
                         </FormItem>
-                        <FormItem style={formItemClass} {...formItemLayout} label='所属知识点ID'>
-                            {getFieldDecorator('classifyKnowledge', {
-                                initialValue: classifyKnowledge
-                            })(
-                                <Input/>
-                            )}
-                        </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='解析'>
                             {getFieldDecorator('description', {
                                 initialValue: description

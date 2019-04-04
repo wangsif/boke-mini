@@ -31,7 +31,7 @@ class ClassifyFilter extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        const {dataSource,onAddCard} = this.props;
+        const {dataSource,onAddCard,onDelete} = this.props;
         const {classifyName} = dataSource.filter.toJS();
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
@@ -53,6 +53,13 @@ class ClassifyFilter extends Component {
                         onAddCard && onAddCard(true);
                         } }>
                         添加
+                    </Button>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" onClick={ () => {
+                        onDelete && onDelete();
+                    } }>
+                        删除
                     </Button>
                 </FormItem>
             </Form>

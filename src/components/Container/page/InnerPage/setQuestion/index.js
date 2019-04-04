@@ -66,16 +66,28 @@ class SetQuestion extends Component {
                                     align:'left'
                                 },
                                {
-                                    title: '所属知识点ID',
-                                    dataIndex: 'classifyKnowledge',
-                                    key: 'classifyKnowledge',
+                                    title: '所属知识点',
+                                    dataIndex: 'knowledgeString',
+                                    key: 'knowledgeString',
                                     align:'left'
                                 },
+                               {
+                                   title: '题目',
+                                   dataIndex: 'title',
+                                   key: 'title',
+                                   align:'left'
+                               },
+                               {
+                                   title: '选项',
+                                   dataIndex: 'choose',
+                                   key: 'choose',
+                                   align:'left'
+                               },
                                {
                                     title: '解析',
                                     dataIndex: 'description',
                                     key: 'description',
-                                    align:'left'
+                                    align:'left',
                                 },
                                {
                                     title: '所属套题ID',
@@ -83,34 +95,17 @@ class SetQuestion extends Component {
                                     key: 'setId',
                                     align:'left'
                                 },
+
                                {
-                                    title: '选项',
-                                    dataIndex: 'choose',
-                                    key: 'choose',
+                                    title: '所属试卷',
+                                    dataIndex: 'paperTitles',
+                                    key: 'paperTitles',
                                     align:'left'
                                 },
                                {
-                                    title: '套题小题唯一主键',
-                                    dataIndex: 'id',
-                                    key: 'id',
-                                    align:'left'
-                                },
-                               {
-                                    title: '',
-                                    dataIndex: 'title',
-                                    key: 'title',
-                                    align:'left'
-                                },
-                               {
-                                    title: '所属试卷ID',
-                                    dataIndex: 'paperIds',
-                                    key: 'paperIds',
-                                    align:'left'
-                                },
-                               {
-                                    title: '所属知识点ID 路径',
-                                    dataIndex: 'classifyKnowledgePath',
-                                    key: 'classifyKnowledgePath',
+                                    title: '所属知识点路径',
+                                    dataIndex: 'classifyStringPath',
+                                    key: 'classifyStringPath',
                                     align:'left'
                                 },
                                 {

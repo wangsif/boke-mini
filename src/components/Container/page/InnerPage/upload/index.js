@@ -11,6 +11,7 @@ class UploadFile extends Component {
 
 
     onChange(info) {
+        console.log(info)
         if (info.file.status !== 'uploading') {
             console.log(info.file, info.fileList);
         }
@@ -19,6 +20,7 @@ class UploadFile extends Component {
         } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
         }
+        return info.response;
     }
 
 
@@ -38,6 +40,10 @@ class UploadFile extends Component {
                             <Icon type="upload"/> 点击上传试卷
                         </Button>
                     </Upload>
+                </Card>
+
+                <Card>
+
                 </Card>
             </div>
         );

@@ -6,6 +6,8 @@ import QuestionDetailAddModal from './modal';
 import QuestionDetailStore from 'store/QuestionDetailStore';
 import QuestionDetailAction from 'actions/QuestionDetailAction';
 import {connect} from 'alt-react';
+import ClassifyAction from "../../../../../actions/ClassifyAction";
+import ClassifyStore from "../../../../../store/ClassifyStore";
 
 class QuestionDetail extends Component {
 
@@ -40,10 +42,9 @@ class QuestionDetail extends Component {
     handleEditSubmit = (editQuestionDetailDataId,area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,) => {
         QuestionDetailAction.update(editQuestionDetailDataId,area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,);
     }
-
     render() {
         let _self = this;
-        let {questionDetail, filter,editModal, editQuestionDetailData} = this.props;
+        let {questionDetail, filter,editModal, editQuestionDetailData, classify} = this.props;
         return (
             <div >
                 <Card title="题目管理" style={{marginBottom: 30}}>
@@ -65,12 +66,7 @@ class QuestionDetail extends Component {
                                     key: 'categoryInPaper',
                                     align:'left'
                                 },
-                               {
-                                    title: '创建时间',
-                                    dataIndex: 'createTime',
-                                    key: 'createTime',
-                                    align:'left'
-                                },
+
                                {
                                     title: '题型题',
                                    key: 'questionType',
@@ -93,8 +89,8 @@ class QuestionDetail extends Component {
                                 },
                                {
                                     title: '所属知识点',
-                                    dataIndex: 'classifyKnowledge',
-                                    key: 'classifyKnowledge',
+                                    dataIndex: 'knowledgeString',
+                                    key: 'knowledgeString',
                                     align:'left'
                                 },
                                {
@@ -117,8 +113,8 @@ class QuestionDetail extends Component {
                                 },
                                {
                                     title: '所属试卷',
-                                    dataIndex: 'paperIds',
-                                    key: 'paperIds',
+                                    dataIndex: 'paperTitles',
+                                    key: 'paperTitles',
                                     align:'left'
                                 },
                                {
@@ -141,10 +137,16 @@ class QuestionDetail extends Component {
                                 },
                                {
                                     title: '知识点路径',
-                                    dataIndex: 'classifyKnowledgePath',
-                                    key: 'classifyKnowledgePath',
+                                    dataIndex: 'classifyStringPath',
+                                    key: 'classifyStringPath',
                                     align:'left'
                                 },
+                               {
+                                   title: '创建时间',
+                                   dataIndex: 'createTime',
+                                   key: 'createTime',
+                                   align:'left'
+                               },
                                 {
                                     title: '操作',
                                     key: 'operator',
@@ -174,7 +176,7 @@ class QuestionDetail extends Component {
                         <span>总计{questionDetail.get('total')}条数据，每页显示{questionDetail.get('pageSize')}条，共{Math.ceil(questionDetail.get('total') / questionDetail.get('pageSize'))}页，当前第{questionDetail.get('pageNo')}页</span>
                     </Tooltip>
                 </Card>
-                {editModal.show ? <QuestionDetailAddModal show={editModal.show} onCloseModal={()=>this.showEditModal(false)}
+                {editModal.show ? <QuestionDetailAddModal classify={classify} show={editModal.show} onCloseModal={()=>this.showEditModal(false)}
                     onSubmit={this.handleAddSubmit} onEditSubmit={this.handleEditSubmit}
                     editQuestionDetailData={editQuestionDetailData}/> : null}
             </div>
@@ -187,6 +189,7 @@ class QuestionDetail extends Component {
             pageNo: questionDetail.get('pageNo'),
             pageSize: questionDetail.get('pageSize')
         }, filter.toJS());
+        ClassifyAction.fetchData();
     }
 
 }
@@ -200,7 +203,8 @@ export default connect(QuestionDetail, {
             questionDetail: QuestionDetailStore.getState().questionDetail,
             filter: QuestionDetailStore.getState().filter,
             editModal: QuestionDetailStore.getState().editModal,
-            editQuestionDetailData:QuestionDetailStore.getState().editQuestionDetailData
+            editQuestionDetailData:QuestionDetailStore.getState().editQuestionDetailData,
+            classify:ClassifyStore.getState().classify
         }
     }
 });
