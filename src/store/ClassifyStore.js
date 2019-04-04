@@ -24,7 +24,6 @@ class ClassifyStore{
             editClassifyData: null
         }
     }
-
     onLoading(isLoding){
         this.setState(({classify})=>({
             classify: classify.update('loading',v=>isLoding)}));

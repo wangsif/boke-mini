@@ -13,8 +13,9 @@ class Classify extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            keyArr:[]
+            keyArr:[],
         }
+        this.classifyDataArr=[]
     }
 
 
@@ -67,21 +68,32 @@ class Classify extends Component {
         })
         return newData;
     }
-    onDelete = (data)=>{
+    filterData=(data,id)=>{
         console.log(data)
-        let {keyArr} = this.state;
-        console.log(keyArr)
-        let filterData=[];
-        keyArr.map(kid=>{
-            filterData = data.filter(item=>{
-                if(item.key.split('-').length===2){
-                    console.log(item.key!==kid)
-                    return item.key!==kid;
+        let newData = data.filter(value=>{
+            value.children = value.children.filter(item=>{
+                if(item){
+                    return item.key!==id;
                 }
-                return true; 
             });
+            console.log(value.children)
+            return value.children[0];
         });
-        console.log(filterData)
+        return newData;
+    }
+    onDelete = (data)=>{
+        let {keyArr} = this.state;
+        let {classifyDataArr} = this;
+        let newData = [];
+        for(var i = 0;i<keyArr.length;i++){
+            console.log(classifyDataArr)
+            if(classifyDataArr.length===0){
+                newData = this.filterData(data,keyArr[i]);
+            }else{
+                newData = this.filterData(classifyDataArr,keyArr[i]);
+            }
+            this.classifyDataArr=newData;
+        }
     }
     onGetSelectKey = (keys)=>{
         this.setState({
@@ -91,6 +103,7 @@ class Classify extends Component {
     render() {
         let _self = this;
         let {classify, filter, editModal, editClassifyData} = this.props;
+        console.log(classify.get("data").toArray())
         classify = this.transformFormat(classify.get("data").toArray());
         return (
             <div>
