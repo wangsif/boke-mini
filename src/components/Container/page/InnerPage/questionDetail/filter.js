@@ -44,13 +44,15 @@ class QuestionDetailFilter extends Component {
             newArray["value"] = "/"+val["pid"]+"/"+val["id"];
             newArray["label"] = val["classifyName"];
             newArray["id"] = val["pid"]+"-"+val["id"];
-            val.children.map((item,index)=>{
-                let newObj ={};
-                newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
-                newObj["label"] = item.classifyName;
-                newObj["id"] ="0-"+ item.pid+"-"+index;
-                newArray["children"].push(newObj);
-            });
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
             return newArray
         })
         return newData;
@@ -65,7 +67,6 @@ class QuestionDetailFilter extends Component {
         const {dataSource, onAddCard,classify} = this.props;
         const {area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath, dateRange, keyword} = dataSource.filter.toJS();
         let questionData = this.transformFormat(classify.get("data").toArray());
-        console.log(questionData)
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
 

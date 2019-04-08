@@ -39,7 +39,6 @@ class QuestionStore{
     }
 
     onShowModels(showModel) {
-        console.log(showModel)
         this.setState(({record}) => ({
             record: record.set('showModel', showModel)
         }));

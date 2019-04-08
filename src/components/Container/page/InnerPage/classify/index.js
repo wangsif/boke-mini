@@ -1,24 +1,33 @@
 import React, {Component} from 'react';
 import ClassifyFilter from './filter'
-import {Table, Card, Button, Tooltip, Popconfirm} from 'antd';
+import {Table, Card, Button, Tooltip, Popconfirm, message} from 'antd';
 import {map} from 'lodash/fp';
 import ClassifyAddModal from './modal';
 import ClassifyStore from 'store/ClassifyStore';
 import ClassifyAction from 'actions/ClassifyAction';
 import {connect} from 'alt-react';
 import ClassifyList from "./classifyList";
-
+import RestAPI from "../../../../../utils/rest-api";
+import Config from "../../../../../app/common";
 class Classify extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             keyArr:[],
+            oneKeyArr:[],
+            classifyData:[],
+            originData:[]
         }
-        this.classifyDataArr=[]
     }
-
-
+    componentWillReceiveProps(nextProps){
+        if(nextProps.classify!==this.props.classify){
+            let classifyData =this.transformFormat(nextProps.classify.get("data").toArray());
+            this.setState({
+                classifyData
+            });
+        }
+        return true;
+    }
     showEditModal = (show) => {
         ClassifyAction.showEditModal(show);
     }
@@ -34,9 +43,45 @@ class Classify extends Component {
     handleAddSubmit = (classifyName, pid, id, dateRange) => {
         ClassifyAction.add(classifyName, pid, id, dateRange);
     }
+    transfromOriginData = (newData)=>{
 
-    handleEditSubmit = (editClassifyDataId, classifyName, pid, id,) => {
-        ClassifyAction.update(editClassifyDataId, classifyName, pid, id,);
+       let originData = newData.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["id"] = val["key"].split("/")[1];
+            newArray["pid"] = val["key"].split("/")[0];
+            newArray["classifyName"] = val["title"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["id"] = item["key"][2];
+                    newObj["pid"] = item["key"].split("/")[1];
+                    newObj["classifyName"] = item["title"];
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        });
+      this.setState({
+          originData
+      })
+    }
+    handleEditSubmit = ( classifyName,classifyType) => {
+        RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null ? '*' : Config.getUserInfo().username}/classify/add/`,
+            {
+                "classifyName":classifyName,
+                "pid":classifyType
+            },
+            'POST',
+            true
+        ).then((data) => {
+            this.showEditModal(false);
+            ClassifyAction.fetchData();
+            message.success('添加成功！');
+
+        }).catch(error => {
+            message.error('添加失败！' + error.message);
+        });
     }
 
     // getRoute() {
@@ -56,64 +101,81 @@ class Classify extends Component {
             newArray["children"]=[];
             newArray["value"] = "/"+val["pid"]+"/"+val["id"];
             newArray["title"] = val["classifyName"];
-            newArray["key"] = val["pid"]+"-"+val["id"];
-            val.children.map((item,index)=>{
-                let newObj ={};
-                newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
-                newObj["title"] = item.classifyName;
-                newObj["key"] ="0-"+ item.pid+"-"+index;
-                newArray["children"].push(newObj);
-            });
+            newArray["key"] = val["pid"]+"/"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["title"] = item.classifyName;
+                    newObj["key"] = "0/"+item["pid"]+"/"+item["id"];
+                    newArray["children"].push(newObj);
+                });
+            }
             return newArray
         })
         return newData;
     }
-    filterData=(data,id)=>{
-        console.log(data)
-        let newData = data.filter(value=>{
-            value.children = value.children.filter(item=>{
-                if(item){
-                    return item.key!==id;
-                }
-            });
-            console.log(value.children)
-            return value.children[0];
-        });
-        return newData;
-    }
+    // filterData=(data,id)=>{
+    //     let newData = data.filter(value=>{
+    //         let newArr= value.children.filter(item=>{
+    //             if(item){
+    //                 return item.key===id;
+    //             }
+    //         });
+    //         return newArr[0];
+    //     });
+    //     return newData;
+    // }
     onDelete = (data)=>{
         let {keyArr} = this.state;
-        let {classifyDataArr} = this;
-        let newData = [];
-        for(var i = 0;i<keyArr.length;i++){
-            console.log(classifyDataArr)
-            if(classifyDataArr.length===0){
-                newData = this.filterData(data,keyArr[i]);
-            }else{
-                newData = this.filterData(classifyDataArr,keyArr[i]);
-            }
-            this.classifyDataArr=newData;
-        }
+        let deletdIds = keyArr.map(idGroup=>{
+            let idArr = idGroup.split('/');
+            return idArr[idArr.length-1];
+        });
+        ClassifyAction.deleteClassifyData(deletdIds);
+    }
+    onSave = ()=>{
+        let {originData} = this.state;
+        let postData = JSON.stringify({"types": originData})
+        RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null ? '*' : Config.getUserInfo().username}/classify/modify/`,
+            {
+                "classifyJSON":postData
+            },
+            'POST',
+            true
+        ).then((data) => {
+            message.success('修改成功！');
+
+        }).catch(error => {
+            message.error('修改失败！' + error.message);
+        });
     }
     onGetSelectKey = (keys)=>{
         this.setState({
           keyArr:  keys
         });
     }
+    onSelectDeleteSingle = (keys)=>{
+        this.setState({
+            oneKeyArr: keys
+        });
+    }
     render() {
         let _self = this;
         let {classify, filter, editModal, editClassifyData} = this.props;
-        console.log(classify.get("data").toArray())
-        classify = this.transformFormat(classify.get("data").toArray());
+        let {classifyData,originData} = this.state;
+
         return (
             <div>
                 <Card title="分类管理" style={{marginBottom: 30}}>
                     <ClassifyFilter dataSource={{filter}} onCommit={ClassifyAction.filterChange}
-                                    onDelete={this.onDelete.bind(this,classify)}
+                                    originData={originData}
+                                    onSave={this.onSave}
+                                    onDelete={this.onDelete.bind(this,classifyData)}
                                     onAddCard={this.showEditModal}/>
                 </Card>
                 <Card title="分类列表">
-                    <ClassifyList checkable={true} classify={classify} onGetSelectKey={this.onGetSelectKey}/>
+                    <ClassifyList transfromOriginData={this.transfromOriginData} checkable={true} onSelectDeleteSingle={this.onSelectDeleteSingle} classify={classifyData} onGetSelectKey={this.onGetSelectKey}/>
                 </Card>
                 {editModal.show ? <ClassifyAddModal show={editModal.show} onCloseModal={() => this.showEditModal(false)}
                                                     onSubmit={this.handleAddSubmit} onEditSubmit={this.handleEditSubmit}

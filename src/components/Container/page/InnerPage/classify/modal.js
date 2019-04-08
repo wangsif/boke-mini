@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
-
+import {connect} from "alt-react";
+import ClassifyStore from "../../../../../store/ClassifyStore";
+const Option = Select.Option;
 const FormItem = Form.Item;
 const formItemLayout = {
     labelCol: {
@@ -45,19 +47,13 @@ class classifyAddModal extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const {imgUrlList} = this.state;
-                let {onSubmit, onEditSubmit, editClassifyData} = this.props;
-                let {classifyName,pid,id,} = values;
-                if (editClassifyData) {
-                    onEditSubmit && onEditSubmit(editClassifyData.id,classifyName,pid,id,);
-                }
-                else {
-                    onSubmit && onSubmit(classifyName,pid,id,);
-                }
+                let {onEditSubmit, editClassifyData} = this.props;
+                let {classifyName,classifyType} = values;
+                classifyType = classifyType.split("/")[1]
+                onEditSubmit && onEditSubmit(classifyName,classifyType);
             }
         });
     }
-
     render() {
         const {getFieldDecorator} = this.props.form;
         let {onCloseModal, show, editClassifyData} = this.props;
@@ -72,6 +68,11 @@ class classifyAddModal extends Component {
             pid = editClassifyData.pid
             id = editClassifyData.id
         }
+        const optionG = [<Option key={0} value={0+"/"+0}>第一级分类</Option>];
+        let oneClassifyData = this.props.classify.get("data").toArray();
+        oneClassifyData.map((val,ind)=>{
+            optionG.push(<Option key={ind+1} value={val.pid+"/"+val.id}>{val.classifyName}</Option>)
+        });
         return (
             <Modal width={800} title={opeartion} visible={show} onCancel={onCloseModal} footer={[]}>
                 <Form onSubmit={this.handleSubmit}>
@@ -80,6 +81,16 @@ class classifyAddModal extends Component {
                                 initialValue: classifyName
                             })(
                                 <Input/>
+                            )}
+                        </FormItem>
+                        <FormItem style={formItemClass} {...formItemLayout} label='所属分类'>
+                            {getFieldDecorator('classifyType')(
+                                <Select
+                                    style={{ width: 200 }}
+                                    placeholder="请选择所属分类"
+                                >
+                                    {optionG}
+                                </Select>,
                             )}
                         </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
@@ -94,4 +105,13 @@ class classifyAddModal extends Component {
 
 const WrappedclassifyAddModal = Form.create()(classifyAddModal);
 
-export default WrappedclassifyAddModal;
+export default connect(WrappedclassifyAddModal, {
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});

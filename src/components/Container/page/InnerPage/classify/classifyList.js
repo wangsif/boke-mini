@@ -13,7 +13,6 @@ export default class ClassifyList extends React.Component {
         }
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps.classify)
         if(nextProps.classify!==this.props.classify){
             this.setState({
                 gData:nextProps.classify
@@ -29,13 +28,13 @@ export default class ClassifyList extends React.Component {
     }
 
     onDrop = (info) => {
+        let {transfromOriginData} = this.props;
         const dropKey = info.node.props.eventKey;
         const dragKey = info.dragNode.props.eventKey;
         const dropPos = info.node.props.pos.split('-');
         const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
-        console.log(dropKey)
-        console.log(dragKey)
-        if(dropKey.split('-').length>=3 ||(dragKey.split('-').length===2 && dropKey.split('-').length===3) ||(dragKey.split('-').length===2 && dropKey.split('-').length===2) ){
+        const dragNextKey = info.dragNode.props.children;
+        if(dropKey.split('/').length>=3 ||(dragKey.split('/').length===2 && dropKey.split('/').length===3) ||(dragKey.split('/').length===2 && dropKey.split('/').length===2) ){
             message.error("错误！分类等级不允许超过两级");
             return false;
         }
@@ -51,7 +50,6 @@ export default class ClassifyList extends React.Component {
             });
         };
         const data = [...this.state.gData];
-
         // Find dragObject
         let dragObj;
         loop(data, dragKey, (item, index, arr) => {
@@ -89,7 +87,7 @@ export default class ClassifyList extends React.Component {
                 ar.splice(i + 1, 0, dragObj);
             }
         }
-
+        transfromOriginData(data);
         this.setState({
             gData: data,
         });
@@ -98,9 +96,12 @@ export default class ClassifyList extends React.Component {
         let {onGetSelectKey} = this.props;
         onGetSelectKey(checkedKeys);
     }
+    onSelect = (checkedKeys, info)=>{
+        let {onSelectDeleteSingle} = this.props;
+        onSelectDeleteSingle(checkedKeys);
+    }
     render() {
         let {gData} = this.state;
-        console.log(gData)
         const loop = data => data.map((item) => {
             if (item.children && item.children.length) {
                 return <TreeNode key={item.key} title={item.title}>{loop(item.children)}</TreeNode>;
@@ -111,6 +112,7 @@ export default class ClassifyList extends React.Component {
             <div>
             <Tree
                 className="draggable-tree"
+                onSelect={this.onSelect}
                 defaultExpandedKeys={this.state.expandedKeys}
                 checkable
                 draggable
