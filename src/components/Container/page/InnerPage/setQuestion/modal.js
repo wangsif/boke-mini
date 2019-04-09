@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
+import ClassifyStore from "../../../../../store/ClassifyStore";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -35,6 +36,7 @@ class setQuestionAddModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            classify:ClassifyStore.getState().classify
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,10 +60,36 @@ class setQuestionAddModal extends Component {
         });
     }
 
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+    onChange = (value) => {
+        console.log(value);
+
+    }
+
     render() {
         const {getFieldDecorator} = this.props.form;
         let {onCloseModal, show, editSetQuestionData} = this.props;
-        const {previewVisible, previewImage, fileList} = this.state;
+        const {previewVisible, previewImage, fileList,classify} = this.state;
+        let questionData = this.transformFormat(classify.get("data").toArray());
         const opeartion = editSetQuestionData ? '修改' : '添加';
         const btnValue = editSetQuestionData ? '保存' : '添加';
         let answer
@@ -113,13 +141,14 @@ class setQuestionAddModal extends Component {
                                 <Input/>
                             )}
                         </FormItem>
-                        <FormItem style={formItemClass} {...formItemLayout} label='所属知识点ID 路径'>
-                            {getFieldDecorator('classifyKnowledgePath', {
+                    <FormItem label="知识点路径">
+                        {getFieldDecorator('classifyKnowledgePath', {
                                 initialValue: classifyKnowledgePath
-                            })(
-                                <Input/>
-                            )}
-                        </FormItem>
+                            }
+                        )(
+                            <Cascader onChange={this.onChange}  options={questionData} style={{width: '150px'}} placeholder="请选择知识点路径"/>
+                        )}
+                    </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">{btnValue}</Button>
                     </FormItem>

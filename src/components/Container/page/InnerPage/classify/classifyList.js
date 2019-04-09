@@ -110,6 +110,7 @@ export default class ClassifyList extends React.Component {
     }
     onCheck = (checkedKeys, info) => {
         let {onGetSelectKey} = this.props;
+        console.log(checkedKeys);
         onGetSelectKey(checkedKeys);
     }
     onSelect = (checkedKeys, info)=>{
