@@ -10,6 +10,8 @@ export default class ClassifyList extends React.Component {
             gData:[],
             a:[],
             expandedKeys: ['0-0', '0-0-0', '0-0-0-0'],
+            updateKeyArr:[],
+            dragKeyArr:[],
         }
     }
     componentWillReceiveProps(nextProps){
@@ -18,14 +20,20 @@ export default class ClassifyList extends React.Component {
                 gData:nextProps.classify
             });
         }
+        if(nextProps.haveSaved!==this.props.haveSaved){
+            this.setState({
+                updateKeyArr:[],
+                dragKeyArr:[]
+            });
+        }
     }
-    onDragEnter = (info) => {
-        console.log(info);
+    // onDragEnter = (info) => {
+    //     console.log(info);
         // expandedKeys 需要受控时设置
         // this.setState({
         //   expandedKeys: info.expandedKeys,
         // });
-    }
+    // }
 
     onDrop = (info) => {
         let {transfromOriginData} = this.props;
@@ -34,11 +42,19 @@ export default class ClassifyList extends React.Component {
         const dropPos = info.node.props.pos.split('-');
         const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
         const dragNextKey = info.dragNode.props.children;
+        let updateKey="";
+        let {updateKeyArr,dragKeyArr} = this.state;
         if(dropKey.split('/').length>=3 ||(dragKey.split('/').length===2 && dropKey.split('/').length===3) ||(dragKey.split('/').length===2 && dropKey.split('/').length===2) ){
             message.error("错误！分类等级不允许超过两级");
             return false;
         }
-
+        updateKey = dropKey+'/'+dragKey.split('/')[dragKey.split('/').length-1];
+        updateKeyArr.push(updateKey);
+        dragKeyArr.push(dragKey);
+        this.setState({
+            updateKeyArr,
+            dragKeyArr
+        });
         const loop = (data, key, callback) => {
             data.forEach((item, index, arr) => {
                 if (item.key === key) {
@@ -87,7 +103,7 @@ export default class ClassifyList extends React.Component {
                 ar.splice(i + 1, 0, dragObj);
             }
         }
-        transfromOriginData(data);
+        transfromOriginData(data,dragKeyArr,updateKeyArr);
         this.setState({
             gData: data,
         });

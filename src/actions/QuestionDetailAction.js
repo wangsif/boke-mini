@@ -95,6 +95,7 @@ area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choos
 
     }
 
+
     filterChange({questionType,classifyKnowledgePath,keyword}) {
         let pageNo = 1;
         this.fetchData({

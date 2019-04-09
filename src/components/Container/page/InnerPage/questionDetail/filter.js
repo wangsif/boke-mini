@@ -58,7 +58,6 @@ class QuestionDetailFilter extends Component {
         return newData;
     }
     onChange = (value) => {
-        console.log(value);
 
     }
     render() {

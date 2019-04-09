@@ -28,6 +28,7 @@ class ClassifyStore{
                 classifyName:"",
                 classifyType:""
             }),
+            haveDeleted:false
         }
     }
     onDeleteClassifyData=(data) =>{
@@ -36,6 +37,9 @@ class ClassifyStore{
             true
         ).then((data) => {
             ClassifyAction.fetchData();
+            this.setState({
+                haveDeleted:new Boolean(true)
+            });
             message.success('删除成功！');
 
         }).catch(error => {

@@ -13,8 +13,7 @@ class ClassifyFilter extends Component {
     constructor(props) {
         super(props);
         this.state={
-            saveBtnDisabled:true,
-            deleteBtnDisabled:true
+
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -30,18 +29,10 @@ class ClassifyFilter extends Component {
             }
         });
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps.originData!==this.props.originData){
-            this.setState({
-                saveBtnDisabled:false
-            })
-        }
-    }
 
     render() {
-        let {deleteBtnDisabled,saveBtnDisabled} = this.state;
         const {getFieldDecorator} = this.props.form;
-        const {dataSource,onAddCard,onDelete,onSave } = this.props;
+        const {dataSource,onAddCard,onDelete,onSave ,deleteBtnDisabled,saveBtnDisabled} = this.props;
         const {classifyName} = dataSource.filter.toJS();
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
@@ -75,9 +66,6 @@ class ClassifyFilter extends Component {
                 <FormItem>
                     <Button type="primary" disabled={saveBtnDisabled} onClick={ () => {
                         onSave && onSave();
-                        this.setState({
-                            saveBtnDisabled:true
-                        })
                     } }>
                         保存
                     </Button>

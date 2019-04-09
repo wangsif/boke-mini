@@ -16,17 +16,24 @@ class Classify extends Component {
             keyArr:[],
             oneKeyArr:[],
             classifyData:[],
-            originData:[]
+            originData:[],
+            haveSaved:false,
+            deleteBtnDisabled:true,
+            saveBtnDisabled:true,
         }
     }
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps,nextState){
         if(nextProps.classify!==this.props.classify){
             let classifyData =this.transformFormat(nextProps.classify.get("data").toArray());
             this.setState({
                 classifyData
             });
         }
-        return true;
+        if(nextProps.haveDeleted!==this.props.haveDeleted){
+            this.setState({
+                deleteBtnDisabled:true
+            });
+        }
     }
     showEditModal = (show) => {
         ClassifyAction.showEditModal(show);
@@ -43,7 +50,7 @@ class Classify extends Component {
     handleAddSubmit = (classifyName, pid, id, dateRange) => {
         ClassifyAction.add(classifyName, pid, id, dateRange);
     }
-    transfromOriginData = (newData)=>{
+    transfromOriginData = (newData,dragKeyArr,updateKeyArr)=>{
 
        let originData = newData.map(val=>{
             let newArray = {};
@@ -54,8 +61,14 @@ class Classify extends Component {
             if(val.children){
                 val.children.map((item,index)=>{
                     let newObj ={};
-                    newObj["id"] = item["key"][2];
-                    newObj["pid"] = item["key"].split("/")[1];
+                    let itemIndex = dragKeyArr.indexOf(item.key);
+                    if(itemIndex!==-1){
+                        newObj["id"] = updateKeyArr[itemIndex].split("/")[2];
+                        newObj["pid"] = updateKeyArr[itemIndex].split("/")[1];
+                    }else {
+                        newObj["id"] = item["key"].split("/")[2];
+                        newObj["pid"] = item["key"].split("/")[1];
+                    }
                     newObj["classifyName"] = item["title"];
                     newArray["children"].push(newObj);
                 });
@@ -63,7 +76,8 @@ class Classify extends Component {
             return newArray
         });
       this.setState({
-          originData
+          originData,
+          saveBtnDisabled:false
       })
     }
     handleEditSubmit = ( classifyName,classifyType) => {
@@ -144,6 +158,11 @@ class Classify extends Component {
             'POST',
             true
         ).then((data) => {
+            this.setState({
+                haveSaved:new Boolean(true),
+                saveBtnDisabled:true,
+            });
+            ClassifyAction.fetchData();
             message.success('修改成功！');
 
         }).catch(error => {
@@ -152,30 +171,48 @@ class Classify extends Component {
     }
     onGetSelectKey = (keys)=>{
         this.setState({
-          keyArr:  keys
+            keyArr:  keys,
         });
+        if(keys.length!==0){
+            this.setState({
+                deleteBtnDisabled:false
+            });
+        }else if(keys.length===0){
+            this.setState({
+                deleteBtnDisabled:true
+            })
+        }
     }
     onSelectDeleteSingle = (keys)=>{
         this.setState({
-            oneKeyArr: keys
+            keyArr: keys,
         });
+        if(keys.length!==0){
+            this.setState({
+                deleteBtnDisabled:false
+            });
+        }else if(keys.length===0){
+            this.setState({
+                deleteBtnDisabled:true
+            })
+        }
     }
     render() {
         let _self = this;
         let {classify, filter, editModal, editClassifyData} = this.props;
-        let {classifyData,originData} = this.state;
+        let {classifyData,originData,haveSaved,deleteBtnDisabled,keyArr,saveBtnDisabled} = this.state;
 
         return (
             <div>
                 <Card title="分类管理" style={{marginBottom: 30}}>
-                    <ClassifyFilter dataSource={{filter}} onCommit={ClassifyAction.filterChange}
+                    <ClassifyFilter dataSource={{filter}} deleteBtnDisabled={deleteBtnDisabled} onCommit={ClassifyAction.filterChange} saveBtnDisabled={saveBtnDisabled}
                                     originData={originData}
                                     onSave={this.onSave}
                                     onDelete={this.onDelete.bind(this,classifyData)}
                                     onAddCard={this.showEditModal}/>
                 </Card>
                 <Card title="分类列表">
-                    <ClassifyList transfromOriginData={this.transfromOriginData} checkable={true} onSelectDeleteSingle={this.onSelectDeleteSingle} classify={classifyData} onGetSelectKey={this.onGetSelectKey}/>
+                    <ClassifyList haveSaved={haveSaved} transfromOriginData={this.transfromOriginData} checkable={true} onSelectDeleteSingle={this.onSelectDeleteSingle} classify={classifyData} onGetSelectKey={this.onGetSelectKey}/>
                 </Card>
                 {editModal.show ? <ClassifyAddModal show={editModal.show} onCloseModal={() => this.showEditModal(false)}
                                                     onSubmit={this.handleAddSubmit} onEditSubmit={this.handleEditSubmit}
@@ -200,7 +237,8 @@ export default connect(Classify, {
             classify: ClassifyStore.getState().classify,
             filter: ClassifyStore.getState().filter,
             editModal: ClassifyStore.getState().editModal,
-            editClassifyData: ClassifyStore.getState().editClassifyData
+            editClassifyData: ClassifyStore.getState().editClassifyData,
+            haveDeleted:ClassifyStore.getState().haveDeleted
         }
     }
 });
