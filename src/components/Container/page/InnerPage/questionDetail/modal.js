@@ -87,6 +87,7 @@ class questionDetailAddModal extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const { TextArea } = Input;
         let {onCloseModal, show, editQuestionDetailData,classify} = this.props;
         const {previewVisible, previewImage, fileList} = this.state;
         let questionData = this.transformFormat(classify.get("data").toArray());
@@ -134,7 +135,7 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('title', {
                             initialValue: title
                         })(
-                            <Input/>
+                            <TextArea rows={4}/>
                         )}
                     </FormItem>
                     {/*<FormItem style={formItemClass} {...formItemLayout} label='地区'>*/}
@@ -148,7 +149,7 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('categoryInPaper', {
                             initialValue: categoryInPaper
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label="题型">
@@ -171,14 +172,14 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('description', {
                             initialValue: description
                         })(
-                            <Input/>
+                            <TextArea rows={4}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='选项'>
                         {getFieldDecorator('choose', {
                             initialValue: choose
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
 
@@ -193,21 +194,21 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('score', {
                             initialValue: score
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='答案'>
                         {getFieldDecorator('answer', {
                             initialValue: answer
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='作答时间'>
                         {getFieldDecorator('limitedTime', {
                             initialValue: limitedTime
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
