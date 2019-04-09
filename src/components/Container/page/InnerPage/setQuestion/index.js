@@ -6,6 +6,7 @@ import SetQuestionAddModal from './modal';
 import SetQuestionStore from 'store/SetQuestionStore';
 import SetQuestionAction from 'actions/SetQuestionAction';
 import {connect} from 'alt-react';
+import ClassifyAction from "../../../../../actions/ClassifyAction";
 
 class SetQuestion extends Component {
 
@@ -37,8 +38,8 @@ class SetQuestion extends Component {
         SetQuestionAction.add(answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,dateRange);
     }
 
-    handleEditSubmit = (editSetQuestionDataId,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,) => {
-        SetQuestionAction.update(editSetQuestionDataId,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+    handleEditSubmit = (editSetQuestionDataId,values,) => {
+        SetQuestionAction.update(editSetQuestionDataId,values);
     }
 
     render() {
@@ -150,6 +151,7 @@ class SetQuestion extends Component {
             pageNo: setQuestion.get('pageNo'),
             pageSize: setQuestion.get('pageSize')
         }, filter.toJS());
+        ClassifyAction.fetchData();
     }
 
 }

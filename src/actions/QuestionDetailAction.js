@@ -70,14 +70,13 @@ area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choos
         }
     }
 
-    update(editQuestionDetailDataId,area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,) {
+    update( editQuestionDetailDataId,val) {
         var _self = this;
+        val["classifyKnowledgePath"] = val["classifyKnowledgePath"][1];
         let {questionDetail} = QuestionDetailStore.getState();
         return function (dispatch) {
-            return RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null?'*':Config.getUserInfo().username}/question/${id}/item`,
-                {
-                    area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,
-                },
+            return RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null?'*':Config.getUserInfo().username}/question/${editQuestionDetailDataId}/item`,
+                val,
                 'POST',
                 true
             ).then((data) => {

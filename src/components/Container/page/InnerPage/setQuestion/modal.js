@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
 import ClassifyStore from "../../../../../store/ClassifyStore";
+import {connect} from "alt-react";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -36,7 +37,6 @@ class setQuestionAddModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            classify:ClassifyStore.getState().classify
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,12 +49,12 @@ class setQuestionAddModal extends Component {
             if (!err) {
                 const {imgUrlList} = this.state;
                 let {onSubmit, onEditSubmit, editSetQuestionData} = this.props;
-                let {answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,} = values;
+                console.log(editSetQuestionData)
                 if (editSetQuestionData) {
-                    onEditSubmit && onEditSubmit(editSetQuestionData.id,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+                    onEditSubmit && onEditSubmit(editSetQuestionData.id,values);
                 }
                 else {
-                    onSubmit && onSubmit(answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+                    onSubmit && onSubmit(...values);
                 }
             }
         });
@@ -87,8 +87,7 @@ class setQuestionAddModal extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        let {onCloseModal, show, editSetQuestionData} = this.props;
-        const {previewVisible, previewImage, fileList,classify} = this.state;
+        let {onCloseModal, show, editSetQuestionData,classify} = this.props;
         let questionData = this.transformFormat(classify.get("data").toArray());
         const opeartion = editSetQuestionData ? '修改' : '添加';
         const btnValue = editSetQuestionData ? '保存' : '添加';
@@ -109,6 +108,9 @@ class setQuestionAddModal extends Component {
             choose = editSetQuestionData.choose
             title = editSetQuestionData.title
             classifyKnowledgePath = editSetQuestionData.classifyKnowledgePath
+        }
+        if(classifyKnowledgePath){
+            classifyKnowledgePath=["/0/"+classifyKnowledgePath.split("/")[1],classifyKnowledgePath]
         }
         return (
             <Modal width={800} title={opeartion} visible={show} onCancel={onCloseModal} footer={[]}>
@@ -141,12 +143,12 @@ class setQuestionAddModal extends Component {
                                 <Input/>
                             )}
                         </FormItem>
-                    <FormItem label="知识点路径">
+                    <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
                         {getFieldDecorator('classifyKnowledgePath', {
                                 initialValue: classifyKnowledgePath
                             }
                         )(
-                            <Cascader onChange={this.onChange}  options={questionData} style={{width: '150px'}} placeholder="请选择知识点路径"/>
+                            <Cascader onChange={this.onChange}  options={questionData} placeholder="请选择知识点路径"/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
@@ -161,4 +163,13 @@ class setQuestionAddModal extends Component {
 
 const WrappedsetQuestionAddModal = Form.create()(setQuestionAddModal);
 
-export default WrappedsetQuestionAddModal;
+export default connect(WrappedsetQuestionAddModal, {
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});

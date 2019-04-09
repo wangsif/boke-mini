@@ -39,8 +39,8 @@ class QuestionDetail extends Component {
         QuestionDetailAction.add(area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,dateRange);
     }
 
-    handleEditSubmit = (editQuestionDetailDataId,area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,) => {
-        QuestionDetailAction.update(editQuestionDetailDataId,area,categoryInPaper,createTime,questionType,classifyKnowledge,description,choose,title,paperIds,score,answer,id,limitedTime,classifyKnowledgePath,);
+    handleEditSubmit = (id,val) => {
+        QuestionDetailAction.update(id,val);
     }
     render() {
         let _self = this;

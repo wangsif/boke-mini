@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
 import ClassifyStore from "../../../../../store/ClassifyStore";
+import {connect} from "alt-react";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -49,12 +50,12 @@ class questionDetailAddModal extends Component {
             if (!err) {
                 const {imgUrlList} = this.state;
                 let {onSubmit, onEditSubmit, editQuestionDetailData} = this.props;
-                let {area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,} = values;
+                console.log(editQuestionDetailData)
                 if (editQuestionDetailData) {
-                    onEditSubmit && onEditSubmit(editQuestionDetailData.id, area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,);
+                    onEditSubmit && onEditSubmit(editQuestionDetailData.id, values);
                 }
                 else {
-                    onSubmit && onSubmit(area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,);
+                    onSubmit && onSubmit(...values);
                 }
             }
         });
@@ -87,8 +88,10 @@ class questionDetailAddModal extends Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         let {onCloseModal, show, editQuestionDetailData,classify} = this.props;
-        let questionData = this.transformFormat(classify.get("data").toArray());
         const {previewVisible, previewImage, fileList} = this.state;
+        let questionData = this.transformFormat(classify.get("data").toArray());
+        console.log(classify.get("data").toArray())
+        console.log(questionData)
         const opeartion = editQuestionDetailData ? '修改' : '添加';
         const btnValue = editQuestionDetailData ? '保存' : '添加';
         let area
@@ -121,6 +124,9 @@ class questionDetailAddModal extends Component {
             limitedTime = editQuestionDetailData.limitedTime
             classifyKnowledgePath = editQuestionDetailData.classifyKnowledgePath
         }
+        if(classifyKnowledgePath){
+            classifyKnowledgePath=["/0/"+classifyKnowledgePath.split("/")[1],classifyKnowledgePath]
+        }
         return (
             <Modal width={800} title={opeartion} visible={show} onCancel={onCloseModal} footer={[]}>
                 <Form onSubmit={this.handleSubmit}>
@@ -145,7 +151,7 @@ class questionDetailAddModal extends Component {
                             <Input/>
                         )}
                     </FormItem>
-                    <FormItem label="题型">
+                    <FormItem style={formItemClass} {...formItemLayout} label="题型">
                         {getFieldDecorator('questionType', {
                                 initialValue: questionType
                             }
@@ -204,12 +210,12 @@ class questionDetailAddModal extends Component {
                             <Input/>
                         )}
                     </FormItem>
-                    <FormItem label="知识点路径">
+                    <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
                         {getFieldDecorator('classifyKnowledgePath', {
                                 initialValue: classifyKnowledgePath
                             }
                         )(
-                            <Cascader onChange={this.onChange}  options={questionData} style={{width: '150px'}} placeholder="请选择知识点路径"/>
+                            <Cascader onChange={this.onChange}  options={questionData} placeholder="请选择知识点路径"/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
@@ -224,4 +230,13 @@ class questionDetailAddModal extends Component {
 
 const WrappedquestionDetailAddModal = Form.create()(questionDetailAddModal);
 
-export default WrappedquestionDetailAddModal;
+export default connect(WrappedquestionDetailAddModal, {
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});

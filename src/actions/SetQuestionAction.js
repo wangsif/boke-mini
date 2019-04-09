@@ -1,9 +1,10 @@
 import alt from 'app/alt';
 import RestAPI from 'utils/rest-api';
-import {message} from 'antd';
+import {Button, message, Popconfirm} from 'antd';
 import {map} from 'lodash/fp';
 import SetQuestionStore from 'store/SetQuestionStore';
 import Config from 'app/common';
+import React from "react";
 
 class SetQuestionAction {
 
@@ -70,14 +71,18 @@ answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,c
         }
     }
 
-    update(editSetQuestionDataId,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,) {
+    update(editSetQuestionDataId,val) {
         var _self = this;
+        if(val[`classifyKnowledgePath`].length>2){
+            val[`classifyKnowledgePath`]=val[`classifyKnowledgePath`][1];
+        }else{
+            val[`classifyKnowledgePath`]=val[`classifyKnowledgePath`][0];
+        }
+        val[`id`]=editSetQuestionDataId
         let {setQuestion} = SetQuestionStore.getState();
         return function (dispatch) {
-            return RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null?'*':Config.getUserInfo().username}/setQuestion/${id}/item`,
-                {
-                    answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,
-                },
+            return RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null?'*':Config.getUserInfo().username}/setQuestion/item`,
+                val,
                 'POST',
                 true
             ).then((data) => {
