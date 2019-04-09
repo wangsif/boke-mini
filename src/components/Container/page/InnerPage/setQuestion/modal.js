@@ -92,6 +92,7 @@ class setQuestionAddModal extends Component {
         let questionData = this.transformFormat(classify.get("data").toArray());
         const opeartion = editSetQuestionData ? '修改' : '添加';
         const btnValue = editSetQuestionData ? '保存' : '添加';
+        const {TextArea} = Input;
         let answer
         let createTime
         let classifyKnowledge
@@ -117,28 +118,28 @@ class setQuestionAddModal extends Component {
                             {getFieldDecorator('answer', {
                                 initialValue: answer
                             })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='解析'>
                             {getFieldDecorator('description', {
                                 initialValue: description
                             })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='选项'>
                             {getFieldDecorator('choose', {
                                 initialValue: choose
                             })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='题目'>
                             {getFieldDecorator('title', {
                                 initialValue: title
                             })(
-                                <Input/>
+                                <TextArea rows={4}/>
                             )}
                         </FormItem>
                     <FormItem label="知识点路径">
