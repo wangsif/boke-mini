@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
+import ClassifyStore from "../../../../../store/ClassifyStore";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -34,7 +35,9 @@ class questionDetailAddModal extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            classify:ClassifyStore.getState().classify
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -56,10 +59,35 @@ class questionDetailAddModal extends Component {
             }
         });
     }
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+    onChange = (value) => {
+        console.log(value);
+
+    }
 
     render() {
         const {getFieldDecorator} = this.props.form;
         let {onCloseModal, show, editQuestionDetailData,classify} = this.props;
+        let questionData = this.transformFormat(classify.get("data").toArray());
         const {previewVisible, previewImage, fileList} = this.state;
         const opeartion = editQuestionDetailData ? '修改' : '添加';
         const btnValue = editQuestionDetailData ? '保存' : '添加';
@@ -117,11 +145,20 @@ class questionDetailAddModal extends Component {
                             <Input/>
                         )}
                     </FormItem>
-                    <FormItem style={formItemClass} {...formItemLayout} label='题型'>
+                    <FormItem label="题型">
                         {getFieldDecorator('questionType', {
-                            initialValue: questionType
-                        })(
-                            <Input/>
+                                initialValue: questionType
+                            }
+                        )(
+                            <Select style={{width: 120}}>
+                                <Option value="">全部</Option>
+                                <Option value="1">单选题</Option>
+                                <Option value="2">多选题</Option>
+                                <Option value="3">不定项选择题</Option>
+                                <Option value="4">判题</Option>
+                                <Option value="5">简答题</Option>
+                                <Option value="6">套题</Option>
+                            </Select>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='问题描述（说明）'>
@@ -167,11 +204,12 @@ class questionDetailAddModal extends Component {
                             <Input/>
                         )}
                     </FormItem>
-                    <FormItem style={formItemClass} {...formItemLayout} label='知识点路径'>
+                    <FormItem label="知识点路径">
                         {getFieldDecorator('classifyKnowledgePath', {
-                            initialValue: classifyKnowledgePath
-                        })(
-                            <Input disabled="true"/>
+                                initialValue: classifyKnowledgePath
+                            }
+                        )(
+                            <Cascader onChange={this.onChange}  options={questionData} style={{width: '150px'}} placeholder="请选择知识点路径"/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>

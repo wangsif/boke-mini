@@ -68,7 +68,7 @@ class QuestionDetail extends Component {
                                 },
 
                                {
-                                    title: '题型题',
+                                    title: '题型',
                                    key: 'questionType',
                                    render(index, data) {
                                        if (data.questionType == 1) {

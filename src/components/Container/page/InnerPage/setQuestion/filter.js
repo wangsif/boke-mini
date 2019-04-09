@@ -3,6 +3,7 @@ import {Form, Input, Button, DatePicker, Select,} from "antd";
 import {trim} from "app/utils";
 const {RangePicker} = DatePicker;
 import {map} from 'lodash/fp';
+import ClassifyStore from "../../../../../store/ClassifyStore";
 
 
 const dateFormat = 'YYYY/MM/DD';
@@ -12,6 +13,9 @@ class SetQuestionFilter extends Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            classify:ClassifyStore.getState().classify,
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -28,11 +32,38 @@ class SetQuestionFilter extends Component {
         });
     }
 
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+    onChange = (value) => {
+        console.log(value);
+
+    }
+
 
     render() {
         const {getFieldDecorator} = this.props.form;
         const {dataSource,onAddCard} = this.props;
         const {setId,keyword,paperIds} = dataSource.filter.toJS();
+        let {classify} = this.state;
+        let questionData = this.transformFormat(classify.get("data").toArray());
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
                  <FormItem label="所属套题ID">
@@ -48,7 +79,7 @@ class SetQuestionFilter extends Component {
                         initialValue: keyword
                     }
                     )(
-                        <Input style={{width: '150px'}} placeholder="请输入所属知识点ID 路径"/>
+                        <Input style={{width: '150px'}} placeholder="请输入关键字"/>
                     )}
                   </FormItem>
 
