@@ -26,8 +26,7 @@ class SetQuestionFilter extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let {onCommit} = _self.props;
-                let {answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,dateRange} = values;
-                onCommit && onCommit(trim(answer),createTime,classifyKnowledge,trim(description),setId,trim(choose),id,trim(title),trim(paperIds),trim(classifyKnowledgePath),dateRange);
+                onCommit && onCommit(values);
             }
         });
     }

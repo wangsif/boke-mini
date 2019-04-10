@@ -100,16 +100,16 @@ answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,c
 
     }
 
-    filterChange(setId,keyword) {
+    filterChange(values) {
         let pageNo = 1;
         this.fetchData({
             pageNo,
             pageSize: SetQuestionStore.getState().setQuestion.get('pageSize')
         }, {
-            setId,keyword
+            ...values
         });
-        return {
-           setId,keyword
+        return { 
+            ...values
         };
     }
 

@@ -64,25 +64,25 @@ class SetQuestion extends Component {
                                     title: '创建时间',
                                     dataIndex: 'createTime',
                                     key: 'createTime',
-                                    width:"6%"
+                                    width:"10%"
                                 },
                                {
                                     title: '所属知识点',
                                     dataIndex: 'knowledgeString',
                                     key: 'knowledgeString',
-                                    width:"5%"
+                                    width:"10%"
                                 },
                                {
                                    title: '题目',
                                    dataIndex: 'title',
                                    key: 'title',
-                                   width:"10%"
+                                   width:"15%"
                                },
                                {
                                    title: '选项',
                                    dataIndex: 'choose',
                                    key: 'choose',
-                                   width:"5%"
+                                   width:"10%"
                                },
                                {
                                     title: '解析',
@@ -101,13 +101,12 @@ class SetQuestion extends Component {
                                     title: '所属试卷',
                                     dataIndex: 'paperTitles',
                                     key: 'paperTitles',
-                                    width:"5%"
+                                    width:"10%"
                                 },
                                {
                                     title: '所属知识点路径',
                                     dataIndex: 'classifyStringPath',
-                                    key: 'classifyStringPath',
-                                    width:"5%"
+                                    key: 'classifyStringPath'
                                 },
                                 {
                                     title: '操作',

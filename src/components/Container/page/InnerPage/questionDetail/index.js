@@ -128,7 +128,7 @@ class QuestionDetail extends Component {
                                     title: '答案',
                                     dataIndex: 'answer',
                                     key: 'answer',
-                                    width:"15%"
+                                    width:"10%"
                                 },
                                {
                                     title: '作答时间',
@@ -146,7 +146,6 @@ class QuestionDetail extends Component {
                                    title: '创建时间',
                                    dataIndex: 'createTime',
                                    key: 'createTime',
-                                   width:"10%"
                                },
                                 {
                                     title: '操作',
