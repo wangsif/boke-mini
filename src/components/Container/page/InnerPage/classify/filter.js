@@ -36,19 +36,19 @@ class ClassifyFilter extends Component {
         const {classifyName} = dataSource.filter.toJS();
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
-                 <FormItem label="分类名">
-                    {getFieldDecorator('classifyName', {
-                        initialValue: classifyName
-                    }
-                    )(
-                        <Input style={{width: '150px'}} placeholder="请输入分类名"/>
-                    )}
-                  </FormItem>
-                <FormItem>
-                    <Button type="primary" htmlType="submit" style={{width: '100%'}}>
-                        查询
-                    </Button>
-                </FormItem>
+                 {/*<FormItem label="分类名">*/}
+                    {/*{getFieldDecorator('classifyName', {*/}
+                        {/*initialValue: classifyName*/}
+                    {/*}*/}
+                    {/*)(*/}
+                        {/*<Input style={{width: '150px'}} placeholder="请输入分类名"/>*/}
+                    {/*)}*/}
+                  {/*</FormItem>*/}
+                {/*<FormItem>*/}
+                    {/*<Button type="primary" htmlType="submit" style={{width: '100%'}}>*/}
+                        {/*查询*/}
+                    {/*</Button>*/}
+                {/*</FormItem>*/}
                 <FormItem>
                     <Button type="primary" onClick={ () => {
                         onAddCard && onAddCard(true);
