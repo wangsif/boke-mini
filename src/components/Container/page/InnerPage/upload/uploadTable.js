@@ -35,19 +35,19 @@ export default class UploadTable extends React.Component{
                     title: '题目', width: "12%", dataIndex: 'title', key: 2,
                 },
                 {
-                    title: '大题标题', width: "15%", dataIndex: 'categoryInPaper', key:3 ,
+                    title: '大题标题', width: "10%", dataIndex: 'categoryInPaper', key:3 ,
                 },
                 {
                     title: '标准作答时间', width: "10%", dataIndex: 'limitedTime', key: 4,
                 },
                 {
-                    title: '解析', width: "20%", dataIndex: 'description', key: 5,
+                    title: '解析', width: "10%", dataIndex: 'description', key: 5,
                 },
                 {
                     title: '选项', width: "10%", dataIndex: 'choose', key: 6,
                 },
                 {
-                    title: '答案', width: "6%", dataIndex: 'answer', key:7,
+                    title: '答案', width: "3%", dataIndex: 'answer', key:7,
                 },
                 {
                     title: '分值', width: "5%", dataIndex: 'score', key: 8,

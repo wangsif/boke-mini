@@ -8,7 +8,6 @@ import QuestionDetailAction from 'actions/QuestionDetailAction';
 import {connect} from 'alt-react';
 import ClassifyAction from "../../../../../actions/ClassifyAction";
 import ClassifyStore from "../../../../../store/ClassifyStore";
-
 class QuestionDetail extends Component {
 
     constructor(props) {
@@ -51,24 +50,26 @@ class QuestionDetail extends Component {
                     <QuestionDetailFilter dataSource={{filter}} onCommit={QuestionDetailAction.filterChange} onAddCard={this.showEditModal} />
                 </Card>
                 <Card title="题目列表">
-                    <Table dataSource={questionDetail.get('data').toArray()} onChange={this.pageChange} scroll={{x: 100 | true}}
+                    <Table dataSource={questionDetail.get('data').toArray()} onChange={this.pageChange}
                            bordered
                            columns={[
                                {
                                     title: '地区',
                                     dataIndex: 'area',
                                     key: 'area',
-                                    align:'left'
+                                    width:"5%"
+
                                 },
                                {
                                     title: '大题标题',
                                     dataIndex: 'categoryInPaper',
                                     key: 'categoryInPaper',
-                                    align:'left'
+                                    width:"5%"
                                 },
 
                                {
                                     title: '题型',
+                                   dataIndex: 'questionType',
                                    key: 'questionType',
                                    render(index, data) {
                                        if (data.questionType == 1) {
@@ -85,71 +86,72 @@ class QuestionDetail extends Component {
                                            return <div>套题</div>
                                        }
                                    },
-                                   align: 'left'
+                                   width:"5%"
                                 },
                                {
                                     title: '所属知识点',
                                     dataIndex: 'knowledgeString',
                                     key: 'knowledgeString',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                     title: '问题描述（说明）',
                                     dataIndex: 'description',
                                     key: 'description',
-                                    align:'left'
+                                    width:"10%"
                                 },
                                {
                                     title: '选项',
                                     dataIndex: 'choose',
                                     key: 'choose',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                     title: '题目',
                                     dataIndex: 'title',
                                     key: 'title',
-                                    align:'left'
+                                    width:"10%"
                                 },
                                {
                                     title: '所属试卷',
                                     dataIndex: 'paperTitles',
                                     key: 'paperTitles',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                     title: '分值',
                                     dataIndex: 'score',
                                     key: 'score',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                     title: '答案',
                                     dataIndex: 'answer',
                                     key: 'answer',
-                                    align:'left'
+                                    width:"15%"
                                 },
                                {
                                     title: '作答时间',
                                     dataIndex: 'limitedTime',
                                     key: 'limitedTime',
-                                    align:'left'
+                                    width:"10%"
                                 },
                                {
                                     title: '知识点路径',
                                     dataIndex: 'classifyStringPath',
                                     key: 'classifyStringPath',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                    title: '创建时间',
                                    dataIndex: 'createTime',
                                    key: 'createTime',
-                                   align:'left'
+                                   width:"10%"
                                },
                                 {
                                     title: '操作',
                                     key: 'operator',
+                                    width:"5%",fixed: 'right',
                                     render: (text, record, index) => {
                                     return (
                                         <div>
@@ -171,7 +173,7 @@ class QuestionDetail extends Component {
                         total: questionDetail.get('total'),
                         current: questionDetail.get('pageNo'),
                         pageSize: questionDetail.get('pageSize')
-                    }} rowKey="id" loading={questionDetail.get('loading')}/>
+                    }} rowKey="id" loading={questionDetail.get('loading')} scroll={{ x: "130%", y: 600 }}/>
                     <Tooltip>
                         <span>总计{questionDetail.get('total')}条数据，每页显示{questionDetail.get('pageSize')}条，共{Math.ceil(questionDetail.get('total') / questionDetail.get('pageSize'))}页，当前第{questionDetail.get('pageNo')}页</span>
                     </Tooltip>

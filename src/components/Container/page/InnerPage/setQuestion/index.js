@@ -58,63 +58,65 @@ class SetQuestion extends Component {
                                     title: '答案',
                                     dataIndex: 'answer',
                                     key: 'answer',
-                                    align:'left'
+                                    width:"3%"
                                 },
                                {
                                     title: '创建时间',
                                     dataIndex: 'createTime',
                                     key: 'createTime',
-                                    align:'left'
+                                    width:"6%"
                                 },
                                {
                                     title: '所属知识点',
                                     dataIndex: 'knowledgeString',
                                     key: 'knowledgeString',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                    title: '题目',
                                    dataIndex: 'title',
                                    key: 'title',
-                                   align:'left'
+                                   width:"10%"
                                },
                                {
                                    title: '选项',
                                    dataIndex: 'choose',
                                    key: 'choose',
-                                   align:'left'
+                                   width:"5%"
                                },
                                {
                                     title: '解析',
                                     dataIndex: 'description',
                                     key: 'description',
-                                    align:'left',
+                                   width:"20%"
                                 },
                                {
                                     title: '所属套题ID',
                                     dataIndex: 'setId',
                                     key: 'setId',
-                                    align:'left'
+                                    width:"5%"
                                 },
 
                                {
                                     title: '所属试卷',
                                     dataIndex: 'paperTitles',
                                     key: 'paperTitles',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                {
                                     title: '所属知识点路径',
                                     dataIndex: 'classifyStringPath',
                                     key: 'classifyStringPath',
-                                    align:'left'
+                                    width:"5%"
                                 },
                                 {
                                     title: '操作',
                                     key: 'operator',
+                                    width:"5%",
+                                    fixed: 'right',
                                     render: (text, record, index) => {
                                     return (
-                                        <div>
+                                        <div style={{backgroundColor:"transparent"}}>
                                             <Button style={{backgroundColor: '#00a854', color: '#fff'}}
                                             onClick={() => this.editRow(index, record)}>编辑</Button >
                                             <span className="ant-divider"/>
@@ -133,7 +135,7 @@ class SetQuestion extends Component {
                         total: setQuestion.get('total'),
                         current: setQuestion.get('pageNo'),
                         pageSize: setQuestion.get('pageSize')
-                    }} rowKey="id" loading={setQuestion.get('loading')}/>
+                    }} rowKey="id" loading={setQuestion.get('loading')} scroll={{ x: "130%", y: 600 }}/>
                     <Tooltip>
                         <span>总计{setQuestion.get('total')}条数据，每页显示{setQuestion.get('pageSize')}条，共{Math.ceil(setQuestion.get('total') / setQuestion.get('pageSize'))}页，当前第{setQuestion.get('pageNo')}页</span>
                     </Tooltip>

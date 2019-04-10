@@ -3,6 +3,7 @@ import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, 
 import ClassifyStore from "../../../../../store/ClassifyStore";
 import {connect} from "alt-react";
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 const formItemLayout = {
     labelCol: {
@@ -159,12 +160,12 @@ class questionDetailAddModal extends Component {
                         )(
                             <Select style={{width: 120}}>
                                 <Option value="">全部</Option>
-                                <Option value="1">单选题</Option>
-                                <Option value="2">多选题</Option>
-                                <Option value="3">不定项选择题</Option>
-                                <Option value="4">判题</Option>
-                                <Option value="5">简答题</Option>
-                                <Option value="6">套题</Option>
+                                <Option value={1}>单选题</Option>
+                                <Option value={2}>多选题</Option>
+                                <Option value={3}>不定项选择题</Option>
+                                <Option value={4}>判题</Option>
+                                <Option value={5}>简答题</Option>
+                                <Option value={6}>套题</Option>
                             </Select>
                         )}
                     </FormItem>

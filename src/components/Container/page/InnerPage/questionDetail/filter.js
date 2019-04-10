@@ -32,7 +32,9 @@ class QuestionDetailFilter extends Component {
             if (!err) {
                 let {onCommit} = _self.props;
                 let {keyword, area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath, dateRange} = values;
-                classifyKnowledgePath = classifyKnowledgePath[1];
+                if(classifyKnowledgePath){
+                    classifyKnowledgePath = classifyKnowledgePath[1];
+                }
                 onCommit && onCommit({questionType, classifyKnowledgePath, keyword});
             }
         });
