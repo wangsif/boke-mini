@@ -18,7 +18,7 @@ class SetQuestionAction {
 
     pageChange(pageNo) {
         let {setQuestion, filter} =SetQuestionStore.getState();
-
+        console.log(filter.toJS())
         this.fetchData({
             pageNo: pageNo,
             pageSize: setQuestion.get('pageSize')
@@ -108,9 +108,8 @@ answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,c
         }, {
             ...values
         });
-        return {
-            ...values
-        };
+        return values
+        ;
     }
 
     fetchData({pageNo, pageSize}, {setId,keyword}) {

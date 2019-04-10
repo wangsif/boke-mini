@@ -49,7 +49,7 @@ export default class ClassifyList extends React.Component {
             message.error("错误！分类等级不允许超过两级");
             return false;
         }
-        if(info.dragNode.props.title.endsWith("其他")){  
+        if(info.dragNode.props.title.endsWith("其他")){
             message.error("其他项不能移动");
             return false;
         }
