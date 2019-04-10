@@ -36,6 +36,7 @@ export default class ClassifyList extends React.Component {
     // }
 
     onDrop = (info) => {
+        console.log(info.dragNode.props.title)
         let {transfromOriginData} = this.props;
         const dropKey = info.node.props.eventKey;
         const dragKey = info.dragNode.props.eventKey;
@@ -46,6 +47,10 @@ export default class ClassifyList extends React.Component {
         let {updateKeyArr,dragKeyArr} = this.state;
         if(dropKey.split('/').length>=3 ||(dragKey.split('/').length===2 && dropKey.split('/').length===3) ||(dragKey.split('/').length===2 && dropKey.split('/').length===2) ){
             message.error("错误！分类等级不允许超过两级");
+            return false;
+        }
+        if(info.dragNode.props.title.endsWith("其他")){  
+            message.error("其他项不能移动");
             return false;
         }
         updateKey = dropKey+'/'+dragKey.split('/')[dragKey.split('/').length-1];

@@ -108,7 +108,7 @@ answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,c
         }, {
             ...values
         });
-        return { 
+        return {
             ...values
         };
     }
