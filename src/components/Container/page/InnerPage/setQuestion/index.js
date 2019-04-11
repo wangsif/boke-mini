@@ -6,6 +6,7 @@ import SetQuestionAddModal from './modal';
 import SetQuestionStore from 'store/SetQuestionStore';
 import SetQuestionAction from 'actions/SetQuestionAction';
 import {connect} from 'alt-react';
+import ClassifyAction from "../../../../../actions/ClassifyAction";
 
 class SetQuestion extends Component {
 
@@ -37,8 +38,8 @@ class SetQuestion extends Component {
         SetQuestionAction.add(answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,dateRange);
     }
 
-    handleEditSubmit = (editSetQuestionDataId,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,) => {
-        SetQuestionAction.update(editSetQuestionDataId,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+    handleEditSubmit = (editSetQuestionDataId,values,) => {
+        SetQuestionAction.update(editSetQuestionDataId,values);
     }
 
     render() {
@@ -57,68 +58,64 @@ class SetQuestion extends Component {
                                     title: '答案',
                                     dataIndex: 'answer',
                                     key: 'answer',
-                                    align:'left'
+                                    width:"3%"
                                 },
                                {
                                     title: '创建时间',
                                     dataIndex: 'createTime',
                                     key: 'createTime',
-                                    align:'left'
+                                    width:"10%"
                                 },
                                {
-                                    title: '所属知识点ID',
-                                    dataIndex: 'classifyKnowledge',
-                                    key: 'classifyKnowledge',
-                                    align:'left'
+                                    title: '所属知识点',
+                                    dataIndex: 'knowledgeString',
+                                    key: 'knowledgeString',
+                                    width:"10%"
                                 },
+                               {
+                                   title: '题目',
+                                   dataIndex: 'title',
+                                   key: 'title',
+                                   width:"15%"
+                               },
+                               {
+                                   title: '选项',
+                                   dataIndex: 'choose',
+                                   key: 'choose',
+                                   width:"10%"
+                               },
                                {
                                     title: '解析',
                                     dataIndex: 'description',
                                     key: 'description',
-                                    align:'left'
+                                   width:"20%"
                                 },
                                {
                                     title: '所属套题ID',
                                     dataIndex: 'setId',
                                     key: 'setId',
-                                    align:'left'
+                                    width:"5%"
+                                },
+
+                               {
+                                    title: '所属试卷',
+                                    dataIndex: 'paperTitles',
+                                    key: 'paperTitles',
+                                    width:"10%"
                                 },
                                {
-                                    title: '选项',
-                                    dataIndex: 'choose',
-                                    key: 'choose',
-                                    align:'left'
-                                },
-                               {
-                                    title: '套题小题唯一主键',
-                                    dataIndex: 'id',
-                                    key: 'id',
-                                    align:'left'
-                                },
-                               {
-                                    title: '',
-                                    dataIndex: 'title',
-                                    key: 'title',
-                                    align:'left'
-                                },
-                               {
-                                    title: '所属试卷ID',
-                                    dataIndex: 'paperIds',
-                                    key: 'paperIds',
-                                    align:'left'
-                                },
-                               {
-                                    title: '所属知识点ID 路径',
-                                    dataIndex: 'classifyKnowledgePath',
-                                    key: 'classifyKnowledgePath',
-                                    align:'left'
+                                    title: '所属知识点路径',
+                                    dataIndex: 'classifyStringPath',
+                                    key: 'classifyStringPath'
                                 },
                                 {
                                     title: '操作',
                                     key: 'operator',
+                                    width:"5%",
+                                    fixed: 'right',
                                     render: (text, record, index) => {
                                     return (
-                                        <div>
+                                        <div style={{backgroundColor:"transparent"}}>
                                             <Button style={{backgroundColor: '#00a854', color: '#fff'}}
                                             onClick={() => this.editRow(index, record)}>编辑</Button >
                                             <span className="ant-divider"/>
@@ -137,7 +134,7 @@ class SetQuestion extends Component {
                         total: setQuestion.get('total'),
                         current: setQuestion.get('pageNo'),
                         pageSize: setQuestion.get('pageSize')
-                    }} rowKey="id" loading={setQuestion.get('loading')}/>
+                    }} rowKey="id" loading={setQuestion.get('loading')} scroll={{ x: "130%", y: 600 }}/>
                     <Tooltip>
                         <span>总计{setQuestion.get('total')}条数据，每页显示{setQuestion.get('pageSize')}条，共{Math.ceil(setQuestion.get('total') / setQuestion.get('pageSize'))}页，当前第{setQuestion.get('pageNo')}页</span>
                     </Tooltip>
@@ -155,6 +152,7 @@ class SetQuestion extends Component {
             pageNo: setQuestion.get('pageNo'),
             pageSize: setQuestion.get('pageSize')
         }, filter.toJS());
+        ClassifyAction.fetchData();
     }
 
 }

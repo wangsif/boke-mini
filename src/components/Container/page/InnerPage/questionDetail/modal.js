@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
+import ClassifyStore from "../../../../../store/ClassifyStore";
+import {connect} from "alt-react";
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 const formItemLayout = {
     labelCol: {
@@ -34,7 +37,9 @@ class questionDetailAddModal extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            classify:ClassifyStore.getState().classify
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -46,21 +51,49 @@ class questionDetailAddModal extends Component {
             if (!err) {
                 const {imgUrlList} = this.state;
                 let {onSubmit, onEditSubmit, editQuestionDetailData} = this.props;
-                let {area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,} = values;
+                console.log(editQuestionDetailData)
                 if (editQuestionDetailData) {
-                    onEditSubmit && onEditSubmit(editQuestionDetailData.id, area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,);
+                    onEditSubmit && onEditSubmit(editQuestionDetailData.id, values);
                 }
                 else {
-                    onSubmit && onSubmit(area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, title, paperIds, score, answer, id, limitedTime, classifyKnowledgePath,);
+                    onSubmit && onSubmit(...values);
                 }
             }
         });
     }
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+    onChange = (value) => {
+        console.log(value);
+
+    }
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        let {onCloseModal, show, editQuestionDetailData} = this.props;
+        const { TextArea } = Input;
+        let {onCloseModal, show, editQuestionDetailData,classify} = this.props;
         const {previewVisible, previewImage, fileList} = this.state;
+        let questionData = this.transformFormat(classify.get("data").toArray());
+        console.log(classify.get("data").toArray())
+        console.log(questionData)
         const opeartion = editQuestionDetailData ? '修改' : '添加';
         const btnValue = editQuestionDetailData ? '保存' : '添加';
         let area
@@ -93,6 +126,9 @@ class questionDetailAddModal extends Component {
             limitedTime = editQuestionDetailData.limitedTime
             classifyKnowledgePath = editQuestionDetailData.classifyKnowledgePath
         }
+        if(classifyKnowledgePath){
+            classifyKnowledgePath=["/0/"+classifyKnowledgePath.split("/")[1],classifyKnowledgePath]
+        }
         return (
             <Modal width={800} title={opeartion} visible={show} onCancel={onCloseModal} footer={[]}>
                 <Form onSubmit={this.handleSubmit}>
@@ -100,7 +136,7 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('title', {
                             initialValue: title
                         })(
-                            <Input/>
+                            <TextArea rows={4}/>
                         )}
                     </FormItem>
                     {/*<FormItem style={formItemClass} {...formItemLayout} label='地区'>*/}
@@ -114,64 +150,74 @@ class questionDetailAddModal extends Component {
                         {getFieldDecorator('categoryInPaper', {
                             initialValue: categoryInPaper
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
-                    <FormItem style={formItemClass} {...formItemLayout} label='题型'>
+                    <FormItem style={formItemClass} {...formItemLayout} label="题型">
                         {getFieldDecorator('questionType', {
-                            initialValue: questionType
-                        })(
-                            <Input/>
+                                initialValue: questionType
+                            }
+                        )(
+                            <Select style={{width: 120}}>
+                                <Option value="">全部</Option>
+                                <Option value={1}>单选题</Option>
+                                <Option value={2}>多选题</Option>
+                                <Option value={3}>不定项选择题</Option>
+                                <Option value={4}>判题</Option>
+                                <Option value={5}>简答题</Option>
+                                <Option value={6}>套题</Option>
+                            </Select>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='问题描述（说明）'>
                         {getFieldDecorator('description', {
                             initialValue: description
                         })(
-                            <Input/>
+                            <TextArea rows={4}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='选项'>
                         {getFieldDecorator('choose', {
                             initialValue: choose
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
 
-                    {/*<FormItem style={formItemClass} {...formItemLayout} label='所属试卷'>*/}
-                        {/*{getFieldDecorator('paperIds', {*/}
-                            {/*initialValue: paperIds*/}
-                        {/*})(*/}
-                            {/*<Input/>*/}
-                        {/*)}*/}
-                    {/*</FormItem>*/}
+                    {/*<FormItem style={formItemClass} {...formItemLayout} label='所属试卷'>
+                        {getFieldDecorator('paperIds', {
+                            initialValue: paperIds
+                        })(
+                            <Input/>
+                        )}
+                    </FormItem>*/}
                     <FormItem style={formItemClass} {...formItemLayout} label='分值'>
                         {getFieldDecorator('score', {
                             initialValue: score
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='答案'>
                         {getFieldDecorator('answer', {
                             initialValue: answer
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='作答时间'>
                         {getFieldDecorator('limitedTime', {
                             initialValue: limitedTime
                         })(
-                            <Input/>
+                            <TextArea rows={1}/>
                         )}
                     </FormItem>
-                    <FormItem style={formItemClass} {...formItemLayout} label='知识点路径'>
+                    <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
                         {getFieldDecorator('classifyKnowledgePath', {
-                            initialValue: classifyKnowledgePath
-                        })(
-                            <Input disabled="true"/>
+                                initialValue: classifyKnowledgePath
+                            }
+                        )(
+                            <Cascader onChange={this.onChange}  options={questionData} placeholder="请选择知识点路径"/>
                         )}
                     </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
@@ -186,4 +232,13 @@ class questionDetailAddModal extends Component {
 
 const WrappedquestionDetailAddModal = Form.create()(questionDetailAddModal);
 
-export default WrappedquestionDetailAddModal;
+export default connect(WrappedquestionDetailAddModal, {
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});

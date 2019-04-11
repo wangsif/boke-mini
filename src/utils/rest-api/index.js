@@ -57,7 +57,7 @@ export default (() => {
         request(url, parameters, method, isValidateJwt,) {
             let head = null;
             method = method.toUpperCase();
-            if (method == 'POST' || method == 'PUT' || method == 'PATCH') {
+            if (method == 'POST' || method == 'PUT' || method == 'PATCH'|| method == 'DELETE') {
                 head = {
                     method: method,
                     headers: {

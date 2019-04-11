@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, Cascader, message} from 'antd';
+import ClassifyStore from "../../../../../store/ClassifyStore";
+import {connect} from "alt-react";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -47,23 +49,49 @@ class setQuestionAddModal extends Component {
             if (!err) {
                 const {imgUrlList} = this.state;
                 let {onSubmit, onEditSubmit, editSetQuestionData} = this.props;
-                let {answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,} = values;
+                console.log(editSetQuestionData)
                 if (editSetQuestionData) {
-                    onEditSubmit && onEditSubmit(editSetQuestionData.id,answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+                    onEditSubmit && onEditSubmit(editSetQuestionData.id,values);
                 }
                 else {
-                    onSubmit && onSubmit(answer,createTime,classifyKnowledge,description,setId,choose,id,title,paperIds,classifyKnowledgePath,);
+                    onSubmit && onSubmit(...values);
                 }
             }
         });
     }
 
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+    onChange = (value) => {
+        console.log(value);
+
+    }
+
     render() {
         const {getFieldDecorator} = this.props.form;
-        let {onCloseModal, show, editSetQuestionData} = this.props;
-        const {previewVisible, previewImage, fileList} = this.state;
+        let {onCloseModal, show, editSetQuestionData,classify} = this.props;
+        let questionData = this.transformFormat(classify.get("data").toArray());
         const opeartion = editSetQuestionData ? '修改' : '添加';
         const btnValue = editSetQuestionData ? '保存' : '添加';
+        const {TextArea} = Input;
         let answer
         let createTime
         let classifyKnowledge
@@ -82,6 +110,9 @@ class setQuestionAddModal extends Component {
             title = editSetQuestionData.title
             classifyKnowledgePath = editSetQuestionData.classifyKnowledgePath
         }
+        if(classifyKnowledgePath){
+            classifyKnowledgePath=["/0/"+classifyKnowledgePath.split("/")[1],classifyKnowledgePath]
+        }
         return (
             <Modal width={800} title={opeartion} visible={show} onCancel={onCloseModal} footer={[]}>
                 <Form onSubmit={this.handleSubmit}>
@@ -89,44 +120,38 @@ class setQuestionAddModal extends Component {
                             {getFieldDecorator('answer', {
                                 initialValue: answer
                             })(
-                                <Input/>
-                            )}
-                        </FormItem>
-                        <FormItem style={formItemClass} {...formItemLayout} label='所属知识点ID'>
-                            {getFieldDecorator('classifyKnowledge', {
-                                initialValue: classifyKnowledge
-                            })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='解析'>
                             {getFieldDecorator('description', {
                                 initialValue: description
                             })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='选项'>
                             {getFieldDecorator('choose', {
                                 initialValue: choose
                             })(
-                                <Input/>
+                                <TextArea rows={1}/>
                             )}
                         </FormItem>
                         <FormItem style={formItemClass} {...formItemLayout} label='题目'>
                             {getFieldDecorator('title', {
                                 initialValue: title
                             })(
-                                <Input/>
+                                <TextArea rows={4}/>
                             )}
                         </FormItem>
-                        <FormItem style={formItemClass} {...formItemLayout} label='所属知识点ID 路径'>
-                            {getFieldDecorator('classifyKnowledgePath', {
+                    <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
+                        {getFieldDecorator('classifyKnowledgePath', {
                                 initialValue: classifyKnowledgePath
-                            })(
-                                <Input/>
-                            )}
-                        </FormItem>
+                            }
+                        )(
+                            <Cascader onChange={this.onChange}  options={questionData} placeholder="请选择知识点路径"/>
+                        )}
+                    </FormItem>
                     <FormItem style={formItemClass} {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">{btnValue}</Button>
                     </FormItem>
@@ -139,4 +164,13 @@ class setQuestionAddModal extends Component {
 
 const WrappedsetQuestionAddModal = Form.create()(setQuestionAddModal);
 
-export default WrappedsetQuestionAddModal;
+export default connect(WrappedsetQuestionAddModal, {
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});

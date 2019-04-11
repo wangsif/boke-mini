@@ -2,6 +2,9 @@ import alt from 'app/alt';
 import {Map,List} from 'immutable';
 import ClassifyAction from 'actions/ClassifyAction';
 import moment from 'moment';
+import RestAPI from "../utils/rest-api";
+import Config from "../app/common";
+import {message} from "antd";
 
 class ClassifyStore{
     constructor() {
@@ -21,10 +24,28 @@ class ClassifyStore{
             editModal: {
                 show: false
             },
-            editClassifyData: null
+            editClassifyData: Map({
+                classifyName:"",
+                classifyType:""
+            }),
+            haveDeleted:false
         }
     }
+    onDeleteClassifyData=(data) =>{
+        RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null ? '*' : Config.getUserInfo().username}/classify/item`, {ids:data.toString()},
+            'delete',
+            true
+        ).then((data) => {
+            ClassifyAction.fetchData();
+            this.setState({
+                haveDeleted:new Boolean(true)
+            });
+            message.success('删除成功！');
 
+        }).catch(error => {
+            message.error('删除失败！' + error.message);
+        });
+    }
     onLoading(isLoding){
         this.setState(({classify})=>({
             classify: classify.update('loading',v=>isLoding)}));
@@ -48,7 +69,6 @@ class ClassifyStore{
 
 
     onFilterChange({classifyName,pid,id,dateRange}){
-
         this.setState(({filter})=>({
             filter:filter
                 .set('classifyName',classifyName)

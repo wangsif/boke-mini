@@ -67,7 +67,7 @@ class QuestionDetailStore {
 
 
     onFilterChange({area, categoryInPaper, createTime, questionType, classifyKnowledge, description, choose, keyword, paperIds, score, answer, id, limitedTime, classifyKnowledgePath, dateRange}) {
-        this.setState(({filter}) => ({
+        this.setState(({filter}) => ({ 
             filter: filter
                 .set('area', area)
                 .set('categoryInPaper', categoryInPaper)

@@ -62,8 +62,7 @@ class SetQuestionStore {
     }
 
 
-    onFilterChange({answer, createTime, classifyKnowledge, description, setId, choose, id, title, paperIds, classifyKnowledgePath, dateRange}) {
-
+    onFilterChange({answer, createTime, classifyKnowledge, description, setId, choose, id, title, paperIds, classifyKnowledgePath, dateRange, keyword}) {
         this.setState(({filter}) => ({
             filter: filter
                 .set('answer', answer)
@@ -77,6 +76,7 @@ class SetQuestionStore {
                 .set('paperIds', paperIds)
                 .set('classifyKnowledgePath', classifyKnowledgePath)
                 .set('dateRange', List(dateRange))
+                .set('keyword', keyword)
         }));
     }
 

@@ -8,7 +8,7 @@ import Config from 'app/common';
 class ClassifyAction {
 
     constructor() {
-        this.generateActions('showEditModal', 'editRow', 'isLoading')
+        this.generateActions('showEditModal', 'editRow', 'isLoading','deleteClassifyData')
     }
 
     loading(isLoding) {
