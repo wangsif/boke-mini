@@ -3,8 +3,7 @@ stages:
   steps:
   - runScriptConfig:
       image: node:8.9-alpine
-      shellScript: "npm install \nnpm install -g cnpm --registry=https://registry.npm.taobao.org\ncnpm
-        run build"
+      shellScript: "npm install \nnpm run build"
 - name: publish
   steps:
   - publishImageConfig:
