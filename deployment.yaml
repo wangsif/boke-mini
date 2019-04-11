@@ -27,7 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: xiaozao-mi-service
-  namespace: metro-construction
+  namespace: xiaozao
 spec:
   selector:
     app: xiaozao-mi
@@ -45,6 +45,13 @@ metadata:
 spec:
   rules:
   - host: xiaozao-mi.ivechain.com
+    http:
+      paths:
+      - backend:
+          serviceName: xiaozao-mi-service
+          servicePort: 80
+
+  - host: localhost
     http:
       paths:
       - backend:
