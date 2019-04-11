@@ -50,10 +50,3 @@ spec:
       - backend:
           serviceName: xiaozao-mi-service
           servicePort: 80
-
-  - host: xiaozao-mi-service
-    http:
-      paths:
-      - backend:
-          serviceName: xiaozao-mi-service
-          servicePort: 80
