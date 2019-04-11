@@ -10,7 +10,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: metro-construction:${CICD_EXECUTION_SEQUENCE}
+      tag: xiaozao:${CICD_EXECUTION_SEQUENCE}
       registry: 127.0.0.1:34414
 - name: Run
   steps:
