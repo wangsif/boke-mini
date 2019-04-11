@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Upload, Card, Icon, message} from 'antd'
-import reqwest from 'reqwest';
 import Config from 'app/common';
 
 

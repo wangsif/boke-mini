@@ -19,29 +19,11 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin({
 module.exports = {
     devServer: {
         proxy: {
-            '/ota/*': {
-                target: 'http://localhost:8090',//ota-service地址；
+            '/api/*': {
+                target: 'http://localhost:9999',
                 secure: false,
                 cookieDomainRewrite: "",
-                pathRewrite: {'^/ota': ''}
-            },
-            '/uc/*': {
-                target: 'http://27.148.196.90:8083',//user-center地址；
-                secure: false,
-                cookieDomainRewrite: "",
-                pathRewrite: {'^/uc': ''}
-            },
-            '/app/*': {
-                target: 'http://27.148.196.90:8081',//线上地址；
-                secure: false,
-                cookieDomainRewrite: "",
-                pathRewrite: {'^/app': ''}
-            },
-            '/service/*': {
-                target: 'http://27.148.196.90:8082',//线上地址；
-                secure: false,
-                cookieDomainRewrite: "",
-                pathRewrite: {'^/service': ''}
+                pathRewrite: {'^/api': ''}
             }
         },
         historyApiFallback: true,
