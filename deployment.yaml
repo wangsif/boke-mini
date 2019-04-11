@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xiaozao-mi
+  namespace: xiaozao
+  labels:
+    app: xiaozao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xiaozao-mi
+  template:
+    metadata:
+      labels:
+        app: xiaozao-mi
+    spec:
+      imagePullSecrets:
+        - name: pipeline-docker-registry
+      containers:
+        - name: xiaozao-mi
+          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: xiaozao-mi-service
+  namespace: metro-construction
+spec:
+  selector:
+    app: xiaozao-mi
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: xiaozao-mi-ingress
+  namespace: xiaozao
+spec:
+  rules:
+  - host: xiaozao-mi.ivechain.com
+    http:
+      paths:
+      - backend:
+          serviceName: xiaozao-mi-service
+          servicePort: 80
