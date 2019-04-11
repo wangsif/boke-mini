@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Upload, Card, Icon, message, Table, Popconfirm,Tabs} from 'antd'
-import reqwest from 'reqwest';
 import Config from 'app/common';
 import WrappedUploadEdit from "./uploadEdit";
 import RestAPI from "../../../../../utils/rest-api";
