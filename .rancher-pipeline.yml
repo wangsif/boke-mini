@@ -19,4 +19,11 @@ stages:
   - applyYamlConfig:
       path: ./deployment.yaml
 timeout: 60
-notification: {}
+notification:
+  recipients:
+  - recipient: http://10.35.19.232:31838/robot/send?access_token=ea93ed9253488574e8a974891cb4ede1b1e8ee07444b058c1ebd7982f5b76287
+    notifier: c-kzx7h:n-2tmfs
+  condition:
+  - Success
+  - Changed
+  - Failed
