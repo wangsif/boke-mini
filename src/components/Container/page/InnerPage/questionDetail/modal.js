@@ -139,13 +139,13 @@ class questionDetailAddModal extends Component {
                             <TextArea rows={4}/>
                         )}
                     </FormItem>
-                    {/*<FormItem style={formItemClass} {...formItemLayout} label='地区'>*/}
-                        {/*{getFieldDecorator('area', {*/}
-                            {/*initialValue: area*/}
-                        {/*})(*/}
-                            {/*<Input/>*/}
-                        {/*)}*/}
-                    {/*</FormItem>*/}
+                    <FormItem style={formItemClass} {...formItemLayout} label='地区'>
+                        {getFieldDecorator('area', {
+                            initialValue: area
+                        })(
+                            <Input/>
+                        )}
+                    </FormItem>
                     <FormItem style={formItemClass} {...formItemLayout} label='大题标题'>
                         {getFieldDecorator('categoryInPaper', {
                             initialValue: categoryInPaper
