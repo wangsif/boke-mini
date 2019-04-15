@@ -65,14 +65,14 @@ class SetQuestionFilter extends Component {
         let questionData = this.transformFormat(classify.get("data").toArray());
         return (
             <Form onSubmit={this.handleSubmit} layout="inline">
-                 <FormItem label="所属套题ID">
-                    {getFieldDecorator('setId', {
-                        initialValue: setId
-                    }
-                    )(
-                        <Input style={{width: '150px'}} placeholder="请输入所属套题ID"/>
-                    )}
-                  </FormItem>
+                 {/*<FormItem label="所属套题ID">*/}
+                    {/*{getFieldDecorator('setId', {*/}
+                        {/*initialValue: setId*/}
+                    {/*}*/}
+                    {/*)(*/}
+                        {/*<Input style={{width: '150px'}} placeholder="请输入所属套题ID"/>*/}
+                    {/*)}*/}
+                  {/*</FormItem>*/}
                  <FormItem label="关键字">
                     {getFieldDecorator('keyword', {
                         initialValue: keyword
