@@ -42,8 +42,9 @@ class QuestionDetail extends Component {
         QuestionDetailAction.update(id,val);
     }
     render() {
-        let _self = this;
+        let _self = this;  
         let {questionDetail, filter,editModal, editQuestionDetailData, classify} = this.props;
+        console.log(questionDetail.get('data').toArray())
         return (
             <div >
                 <Card title="题目管理" style={{marginBottom: 30}}>
