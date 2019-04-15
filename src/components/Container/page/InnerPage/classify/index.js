@@ -50,15 +50,15 @@ class Classify extends Component {
     handleAddSubmit = (classifyName, pid, id, dateRange) => {
         ClassifyAction.add(classifyName, pid, id, dateRange);
     }
-    transfromOriginData = (newData,dragKeyArr,updateKeyArr)=>{
+    transfromOriginData = (newData,dragKeyArr,updateKeyArr)=>{ 
 
        let originData = newData.map(val=>{
             let newArray = {};
-            newArray["children"]=[];
-            newArray["id"] = val["key"].split("/")[1];
-            newArray["pid"] = val["key"].split("/")[0];
-            newArray["classifyName"] = val["title"];
             if(val.children){
+                newArray["children"]=[];
+                newArray["id"] = val["key"].split("/")[1];
+                newArray["pid"] = val["key"].split("/")[0];
+                newArray["classifyName"] = val["title"];
                 val.children.map((item,index)=>{
                     let newObj ={};
                     let itemIndex = dragKeyArr.indexOf(item.key);
@@ -72,6 +72,11 @@ class Classify extends Component {
                     newObj["classifyName"] = item["title"];
                     newArray["children"].push(newObj);
                 });
+            }else {
+                newArray["children"]=[];
+                newArray["id"] = val["key"].split("/")[2];
+                newArray["pid"] = val["key"].split("/")[0];
+                newArray["classifyName"] = val["title"];
             }
             return newArray
         });
