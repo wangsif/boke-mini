@@ -169,7 +169,7 @@ class questionDetailAddModal extends Component {
                             </Select>
                         )}
                     </FormItem>
-                    <FormItem style={formItemClass} {...formItemLayout} label='问题描述（说明）'>
+                    <FormItem style={formItemClass} {...formItemLayout} label='解析'>
                         {getFieldDecorator('description', {
                             initialValue: description
                         })(
