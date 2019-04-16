@@ -96,7 +96,7 @@ class QuestionDetail extends Component {
                                     width:"5%"
                                 },
                                {
-                                    title: '问题描述（说明）',
+                                    title: '解析',
                                     dataIndex: 'description',
                                     key: 'description',
                                     width:"10%"
