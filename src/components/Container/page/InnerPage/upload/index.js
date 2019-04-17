@@ -5,6 +5,7 @@ import WrappedUploadEdit from "./uploadEdit";
 import RestAPI from "../../../../../utils/rest-api";
 import UploadTable from "./uploadTable";
 import Classify from "../classify";
+import ClassifyAction from "../../../../../actions/ClassifyAction";
 const TabPane = Tabs.TabPane;
 class UploadFile extends Component {
     constructor(props) {
@@ -85,6 +86,12 @@ class UploadFile extends Component {
             message.error('删除失败！' + error.message);
         });
     }
+
+    componentDidMount(){
+        let{classify,filter} = this.props;
+        ClassifyAction.fetchData(filter.toJS());
+    }
+
     render() {
         let {dataSource,showEditView,currentRecord} = this.state;
         const props = {

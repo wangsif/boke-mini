@@ -3,6 +3,8 @@ import {Form, Icon, Input, Button, Checkbox, Modal, Select, DatePicker, Upload, 
 import RestAPI from "../../../../../utils/rest-api";
 import Config from "../../../../../app/common";
 import ClassifyStore from "../../../../../store/ClassifyStore";
+import {connect} from "alt-react";
+import ClassifyAction from "../../../../../actions/ClassifyAction";
 const Option = Select.Option;
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -37,9 +39,15 @@ class UploadEdit extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            classify:ClassifyStore.getState().classify
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount(){
+        ClassifyAction.fetchData();
     }
 
     handleSubmit(e) {
@@ -47,9 +55,13 @@ class UploadEdit extends Component {
         let {showEdit,currentRecord,updateData} = this.props;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+            console.log(values)
+            let post = values;
+             post["classifyKnowledgePath"]= values.classifyKnowledgePath[1];
+
             if (!err) {
                 RestAPI.request(`/api/manager/admin/${Config.getUserInfo() == null ? '*' : Config.getUserInfo().username}/question/${currentRecord.id}/item`,
-                    values,
+                    post,
                     'POST',
                     true
                 ).then((data) => {
@@ -64,10 +76,35 @@ class UploadEdit extends Component {
         });
     }
 
+    transformFormat = (data)=>{
+        let newData = data.map(val=>{
+            let newArray = {};
+            newArray["children"]=[];
+            newArray["value"] = "/"+val["pid"]+"/"+val["id"];
+            newArray["label"] = val["classifyName"];
+            newArray["id"] = val["pid"]+"-"+val["id"];
+            if(val.children){
+                val.children.map((item,index)=>{
+                    let newObj ={};
+                    newObj["value"] ="/"+item["pid"]+"/"+item["id"]+"/";
+                    newObj["label"] = item.classifyName;
+                    newObj["id"] ="0-"+ item.pid+"-"+index;
+                    newArray["children"].push(newObj);
+                });
+            }
+            return newArray
+        })
+        return newData;
+    }
+
     render() {
         const {getFieldDecorator} = this.props.form;
-        let { showEdit,showEditView,currentRecord} = this.props;
-        let {questionType,area,title,categoryInPaper,limitedTime,description,choose,answer,score} = currentRecord;
+        let { showEdit,showEditView,currentRecord,classify} = this.props;
+        let {questionType,area,title,categoryInPaper,limitedTime,description,choose,answer,score,classifyKnowledgePath} = currentRecord;
+        let questionData = this.transformFormat(classify.get("data").toArray());
+        if(classifyKnowledgePath){
+            classifyKnowledgePath=["/0/"+classifyKnowledgePath.split("/")[1],classifyKnowledgePath]
+        }
         return (
             <Modal width={800}  visible={showEditView} onCancel={()=>{showEdit(false)}} footer={[]}>
                 <Form onSubmit={this.handleSubmit}>
@@ -120,7 +157,14 @@ class UploadEdit extends Component {
                             <Input/>
                         )}
                     </FormItem>
-
+                    <FormItem style={formItemClass} {...formItemLayout} label="知识点路径">
+                        {getFieldDecorator('classifyKnowledgePath', {
+                                initialValue: classifyKnowledgePath
+                            }
+                        )(
+                            <Cascader onChange={this.onChange}  options={questionData} placeholder="请选择知识点路径"/>
+                        )}
+                    </FormItem>
                     {/*<FormItem style={formItemClass} {...formItemLayout} label='所属试卷'>
                         {getFieldDecorator('paperIds', {
                             initialValue: paperIds
@@ -168,4 +212,13 @@ class UploadEdit extends Component {
 
 const WrappedUploadEdit = Form.create()(UploadEdit);
 
-export default WrappedUploadEdit;
+export default connect (WrappedUploadEdit,{
+    listenTo() {
+        return [ClassifyStore];
+    },
+    getProps() {
+        return {
+            classify: ClassifyStore.getState().classify,
+        }
+    }
+});
