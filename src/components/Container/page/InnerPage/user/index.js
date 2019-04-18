@@ -74,9 +74,9 @@ class User extends Component {
                                    title: '性别',
                                    dataIndex: 'gender',
                                    render(index,data){
-                                       if (data.gender=0){
+                                       if (data.gender==0){
                                         return<div>男</div>
-                                       }else return<div>女</div>
+                                       }else if(data.gender==1)return<div>女</div>
                                    }
                                },
                                {
