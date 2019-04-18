@@ -102,7 +102,7 @@ class QuestionDetail extends Component {
                                    dataIndex: 'description',
                                    key: 'description',
                                    render(index, data) {
-                                       if (data.description.length > 80) {
+                                       if (data.description && data.description.length > 80) {
                                            return data.description.substring(0, 79)+'...';
                                        } return data.description
                                    },
@@ -113,7 +113,7 @@ class QuestionDetail extends Component {
                                    dataIndex: 'choose',
                                    key: 'choose',
                                    render(index, data) {
-                                       if (data.choose.length > 80) {
+                                       if (data.choose && data.choose.length > 80) {
                                            return data.choose.substring(0, 79)+'...';
                                        } return data.choose
                                    },
@@ -129,7 +129,7 @@ class QuestionDetail extends Component {
                                    title: '所属试卷',
                                    dataIndex: 'paperTitles',
                                    key: 'paperTitles',
-                                   width: "5%"
+                                   width: "10%"
                                },
                                {
                                    title: '分值',
