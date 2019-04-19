@@ -16,7 +16,7 @@ spec:
         app: xiaozao-mi
     spec:
       imagePullSecrets:
-        - name: pipeline-docker-registry
+        - name: dockerrepo
       containers:
         - name: xiaozao-mi
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}

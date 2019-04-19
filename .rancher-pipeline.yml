@@ -13,7 +13,8 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: xiaozao-mi:${CICD_EXECUTION_SEQUENCE}
-      registry: 127.0.0.1:34414
+      pushRemote: true
+      registry: dockerrepo.kaopuyun.com
 - name: Run
   steps:
   - applyYamlConfig:
