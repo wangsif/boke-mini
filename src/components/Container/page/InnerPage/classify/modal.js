@@ -49,6 +49,9 @@ class classifyAddModal extends Component {
             if (!err) {
                 let {onEditSubmit, editClassifyData} = this.props;
                 let {classifyName,classifyType} = values;
+                if(values.classifyType==null){
+                    message.error("请选择所属分类")
+                }
                 classifyType = classifyType.split("/")[1]
                 onEditSubmit && onEditSubmit(classifyName,classifyType);
             }

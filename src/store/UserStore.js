@@ -64,9 +64,8 @@ class UserStore {
     }
 
     onPageChange(pageNo) {
-
         this.setState(({userInfos}) => ({
-            user: userInfos.set('pageNo', pageNo)
+            userInfos: userInfos.set('pageNo', pageNo)
         }));
     }
 

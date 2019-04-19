@@ -17,6 +17,7 @@ class User extends Component {
     //翻页触发
     pageChange = (page, pageSize) => {
         let {current} = page;
+        console.log(current)
         UserAction.pageChange(current)
     };
 
@@ -43,6 +44,7 @@ class User extends Component {
     render() {
         let _self = this;
         let {userInfos, filter,editModal, editUserData} = this.props;
+        console.log(userInfos.get('pageNo'))
         return (
             <div >
                 <Card title="用户管理" style={{marginBottom: 30}}>
@@ -107,7 +109,7 @@ class User extends Component {
                            ]}
                            pagination={{
                                total: userInfos.get('total'),
-                               current: userInfos.get('pageNo'),
+                               currentPage: userInfos.get('pageNo'),
                                pageSize: userInfos.get('pageSize')
                            }} rowKey="id" loading={userInfos.get('loading')}/>
                     <Tooltip>
