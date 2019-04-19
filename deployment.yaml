@@ -16,7 +16,7 @@ spec:
         app: xiaozao-mi
     spec:
       imagePullSecrets:
-        - name: dockerrepo
+        - name: repo-kaopuyun
       containers:
         - name: xiaozao-mi
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
