@@ -4,16 +4,16 @@ stages:
   - runScriptConfig:
       image: node:9.2.1-alpine
       shellScript: |-
-        npm install -g cnpm --registry=https://registry.npm.taobao.org
-        cnpm install
-        cnpm run build
+        npm install
+        npm run build
 - name: publish
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: xiaozao-mi:${CICD_EXECUTION_SEQUENCE}
-      registry: 127.0.0.1:34414
+      pushRemote: true
+      registry: dockerrepo.kaopuyun.com
 - name: Run
   steps:
   - applyYamlConfig:
