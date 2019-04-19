@@ -63,7 +63,7 @@ class UserStore {
         });
     }
 
-    onPageChange(pageNo) { 
+    onPageChange(pageNo) {
         this.setState(({userInfos}) => ({
             userInfos: userInfos.set('pageNo', pageNo)
         }));
