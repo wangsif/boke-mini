@@ -98,31 +98,36 @@ class QuestionDetail extends Component {
                                    width: "5%"
                                },
                                {
+                                   title: '题目',
+                                   dataIndex: 'title',
+                                   key: 'title',
+                                   render(index, data) {
+                                       if (data.title && data.title.length > 50) {
+                                           return data.title.substring(0, 49)+'...';
+                                       } return data.title
+                                   },
+                                   width: "10%"
+                               },
+                               {
                                    title: '解析',
                                    dataIndex: 'description',
                                    key: 'description',
                                    render(index, data) {
-                                       if (data.description && data.description.length > 80) {
-                                           return data.description.substring(0, 79)+'...';
+                                       if (data.description && data.description.length > 50) {
+                                           return data.description.substring(0, 49)+'...';
                                        } return data.description
                                    },
-                                   width: "15%",
+                                   width: "10%",
                                },
                                {
                                    title: '选项',
                                    dataIndex: 'choose',
                                    key: 'choose',
                                    render(index, data) {
-                                       if (data.choose && data.choose.length > 80) {
-                                           return data.choose.substring(0, 79)+'...';
+                                       if (data.choose && data.choose.length > 50) {
+                                           return data.choose.substring(0, 49)+'...';
                                        } return data.choose
                                    },
-                                   width: "15%"
-                               },
-                               {
-                                   title: '题目',
-                                   dataIndex: 'title',
-                                   key: 'title',
                                    width: "10%"
                                },
                                {
@@ -153,7 +158,7 @@ class QuestionDetail extends Component {
                                    title: '路径',
                                    dataIndex: 'classifyStringPath',
                                    key: 'classifyStringPath',
-                                   width: "5%"
+                                   width: "7%"
                                },
                                {
                                    title: '创建时间',
