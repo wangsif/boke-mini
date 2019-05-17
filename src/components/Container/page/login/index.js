@@ -12,11 +12,12 @@ class LoginPage extends Component {
     }
 
 
-    onSubmit(username,password) {
-        RestAPI.request(`/api/manager/admin/`+username+`/login`,{password},'GET',true)
+    onSubmit(username,password,authcode,uuid) {
+        RestAPI.request(`/api/app/user/login`,{username, password,authCode:authcode,authcodeuuid:uuid},'POST',false)
             .then(data =>{
                 Config.localItem(Config.localKey.userJwt,new Date().getTime());
                 Config.setUserInfo(data);
+                Config.removeLocalItem(Config.localKey.authCode)
                 context.getBrowserHistory().push("/home")
             })
             .catch(function (error) {
@@ -24,11 +25,12 @@ class LoginPage extends Component {
             });
     }
 
+
     render() {
         return (
             <div className="container">
                 <div className="account-container">
-                        <Card title="小灶助考管理后台登录">
+                        <Card title="个人博客登录">
                             <LoginForm onSubmit={this.onSubmit}/>
                         </Card>
                 </div>

@@ -1,7 +1,7 @@
 {
   "name": "OtaServiceMI",
   "version": "1.0.0",
-  "description": "小灶管理后台",
+  "description": "个人博客",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,7 @@
     "alt": "^0.18.6",
     "alt-react": "0.0.1",
     "antd": "^3.1.4",
+    "base-64": "^0.1.0",
     "bizcharts": "^3.1.8",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.5",

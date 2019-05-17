@@ -20,7 +20,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api/*': {
-                target: 'http://172.16.10.160:9999',//ota-service地址；
+                target: 'http://127.0.0.1:8080',//ota-service地址；
                 secure: false,
                 cookieDomainRewrite: "",
                 pathRewrite: {'^/api': ''}
