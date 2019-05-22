@@ -27,7 +27,7 @@ module.exports = {
             }
         },
         historyApiFallback: true,
-        port: '5011',
+        port: '5013',
         hot: true,
         inline: true
     },

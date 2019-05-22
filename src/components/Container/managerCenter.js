@@ -1,15 +1,17 @@
 import React, {Component, PropTypes, Fragment } from 'react';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
-import {Menu, Icon, Button, Layout, Breadcrumb, message, Tabs} from 'antd';
+import {Menu, Icon, Button, Layout, Breadcrumb, message, Tabs, Input , Carousel } from 'antd';
 import context from '../../app/context';
 import Common from 'app/common';
 import {map} from 'lodash/fp';
 import Article from '../../components/Container/page/InnerPage/article/index';
 
 import Config from 'app/common';
+import base from '../../assets/style/_variables/base.styl';
 const {Header, Content, Footer, Sider} = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+const Search = Input.Search;
 import {withRouter} from 'react-router';
 import Bundle from "../../routes";
 const TabPane = Tabs.TabPane;
@@ -47,6 +49,7 @@ class ManagerCenter extends Component {
 
     };
 
+
     // sideBarClick = ({key}) => {
     //     context.getBrowserHistory().push(`/home/${key}`);
     //
@@ -62,6 +65,13 @@ class ManagerCenter extends Component {
         }));
     };
 
+    componentWillReceiveProps(nextProps){
+        let key = nextProps.match.params.key;
+        this.setState({
+            key:key
+        })
+    }
+
 
     render() {
         let userInfo = Common.getUserInfo();
@@ -75,13 +85,18 @@ class ManagerCenter extends Component {
         let contentHeight = (screenHeight - 125) + 'px';
         return (
             <Layout>
+
             <Header style={{
                 background: '#fff',
                 padding: 0,
                 height: '50px',
             }}>
 
-            <Menu onClick={this.handleClick} selectedKeys={[this.state.current]}  defaultSelectedKeys={['setMeal']} mode="horizontal" selectedKeys={selectMenu} >
+            <Menu onClick={this.handleClick}  defaultSelectedKeys={['setMeal']} mode="horizontal" selectedKeys={selectMenu}
+                  style={{
+                marginLeft: '200px',
+                marginRight: '',
+            }}>
                 <Menu.Item mode="horizontal" style={{lineHeight:'50px',textAlign: 'left', color : 'red' ,fontSize: '40px'}} disabled>
                     <span>阿福博客</span>
                 </Menu.Item>
@@ -115,7 +130,11 @@ class ManagerCenter extends Component {
                         留言板
                     </span>
                 </Menu.Item>
-
+                <Search
+                    placeholder="input search text"
+                    onSearch={value => console.log(value)}
+                    style={{ width: 200 }}
+                />
 
                     <Menu mode="horizontal" onClick={this.logout} style={{
                         float: 'right',
@@ -130,6 +149,29 @@ class ManagerCenter extends Component {
             </Menu>
 
             </Header>
+                <Header style={{
+                    background: '#fff',
+                    padding: 0,
+                    height: '50px',
+                    width : '512px',
+                    marginLeft: '300px',
+                    marginRight: 'auto',
+                }}>
+                    <Carousel autoplay style={{width : '300px'}}>
+                        <div>
+                            <img width={'100%'} height={'100%'} src="http://wangsf.xyz/images/timg_(2).jpg" />
+                        </div>
+                        <div>
+                           <img src="http://wangsf.xyz/images/5a06dc6f953c457bbc24a6116cebf36e6f67873220cad-l8DAkl_fw658.jpg" />
+                        </div>
+                        <div>
+                            <img src="http://wangsf.xyz/images/timg.jpg" />
+                        </div>
+                        <div>
+                            <img src="http://wangsf.xyz/images/timg_(1).jpg" />
+                        </div>
+                    </Carousel>
+                </Header>
 
                 <Content
                     style={{
@@ -140,6 +182,7 @@ class ManagerCenter extends Component {
                         overflow: 'scroll'
                     }}>
                     <Switch>
+                        <Route path={`${match.url}`} component={Article} exact/>
                         <Route path={`${match.url}/app`} component={Article} />
                     </Switch>
                 </Content>
