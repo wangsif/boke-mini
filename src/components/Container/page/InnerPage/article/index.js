@@ -70,14 +70,4 @@ class Article extends Component{
         );
     }
 }
-export default connect (Article, {
-    listenTo() {
-        return [ArticleStore];
-    },
-    getProps() {
-        return {
-            // setting: ArticleStore.getState().setting,
-            // filter: ArticleStore.getState().filter,
-        }
-    }
-});
+export default Article;
