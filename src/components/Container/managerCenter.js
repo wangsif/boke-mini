@@ -1,5 +1,5 @@
 import React, {Component, PropTypes, Fragment } from 'react';
-import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Switch, HashRouter  as Router} from 'react-router-dom';
 import {Menu, Icon, Button, Layout, Breadcrumb, message, Tabs, Input , Carousel } from 'antd';
 import context from '../../app/context';
 import Common from 'app/common';
@@ -161,7 +161,8 @@ class ManagerCenter extends Component {
                         overflow: 'scroll'
                     }}>
                     <Switch>
-                        <Route path={`${match.url}/mail`} component={Mail} exact/>
+                        <Route path={`${match.url}/`} component={Mail} exact/>
+                        <Route path={`${match.url}/mail`} component={Mail}/>
                         <Route path={`${match.url}/app`} component={Article} />
                     </Switch>
                 </Content>

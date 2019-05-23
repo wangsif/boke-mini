@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
 import ArticleStore from 'store/ArticleStore';
+import ArticleAction from 'action/ArticleAction';
 import {connect} from 'alt-react';
 import { Row, Col, List, Avatar, Icon } from 'antd';
 const listData = [];
-for (let i = 0; i < 23; i++) {
-    listData.push({
-        href: '',
-        title: `阿福 第${i+1}天日志`,
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' ,
-        description:
-            'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    });
-}
+
+
 
 const IconText = ({ type, text }) => (
     <span>
@@ -24,7 +16,34 @@ const IconText = ({ type, text }) => (
 
 class Article extends Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    //翻页触发
+    pageChange = (page, pageSize) => {
+        let {current} = page;
+        ArticleAction.pageChange(current)
+    };
+
+
     render(){
+
+        let _self = this;
+        let {article, filter, editModal, editQuestionDetailData, classify} = this.props;
+        console.log(article.get('data').toArray())
+
+
+        for (let i = 0; i < article.get('total'); i++) {
+            article.get('data').push({
+                href: '',
+                title: ``,
+                avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' ,
+                createTime:'',
+                content:
+                    '',
+            });
+        }
         return(
 
             <List
@@ -36,12 +55,12 @@ class Article extends Component{
                     },
                     pageSize: 3,
                 }}
-                dataSource={listData}
-                footer={
-                    <div>
-                        <b>ant design</b> footer part
-                    </div>
-                }
+                dataSource={article.get("data").toArray()}
+                // footer={
+                //     <div>
+                //         <b>ant design</b> footer part
+                //     </div>
+                // }
                 renderItem={item => (
                     <List.Item
                         key={item.title}
@@ -61,13 +80,30 @@ class Article extends Component{
                         <List.Item.Meta
                             avatar={<Avatar src={item.avatar} />}
                             title={<a href={item.href}>{item.title}</a>}
-                            description={item.description}
+                            createTime ={item.createTime}
+                            content={item.content}
                         />
+                        {item.createTime}<br/>
                         {item.content}
+
                     </List.Item>
+
                 )}
             />
         );
     }
+    componentDidMount() {
+
+        ArticleAction.fetchData({pageNo:"1", pageSize:"3"})
+    }
 }
-export default Article;
+export default connect(Article, {
+    listenTo() {
+        return [ArticleStore];
+    },
+    getProps() {
+        return {
+            article: ArticleStore.getState().article,
+        }
+    }
+});
