@@ -46,6 +46,7 @@ class ArticleAction {
                 });
         }
     }
+
 }
 
 export default alt.createActions(ArticleAction)

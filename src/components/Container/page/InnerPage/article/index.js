@@ -83,7 +83,7 @@ class Article extends Component{
                             createTime ={item.createTime}
                             content={item.content}
                         />
-                        {item.createTime}<br/>
+                        发布时间： {item.createTime}<br/>
                         {item.content}
 
                     </List.Item>

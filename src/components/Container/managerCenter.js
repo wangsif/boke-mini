@@ -1,10 +1,12 @@
 import React, {Component, PropTypes, Fragment } from 'react';
-import {Route, Switch, HashRouter  as Router} from 'react-router-dom';
+import {Route, Switch, HashRouter  as Router,Link} from 'react-router-dom';
 import {Menu, Icon, Button, Layout, Breadcrumb, message, Tabs, Input , Carousel } from 'antd';
 import context from '../../app/context';
 import Common from 'app/common';
 import {map} from 'lodash/fp';
 import Article from '../../components/Container/page/InnerPage/article/index';
+import FindArticle from './page/InnerPage/article/findArticle/findArticle';
+import MailAction from  'action/MailAction';
 
 import Config from 'app/common';
 import base from '../../assets/style/_variables/base.styl';
@@ -93,23 +95,23 @@ class ManagerCenter extends Component {
                 height: '50px',
             }}>
 
-            <Menu onClick={this.handleClick}  defaultSelectedKeys={['setMeal']} mode="horizontal" selectedKeys={selectMenu}
+            <Menu  defaultSelectedKeys={['setMeal']} mode="horizontal" selectedKeys={selectMenu}
                   style={{
                 marginLeft: '200px',
                 marginRight: '',
             }}>
-                <Menu.Item mode="horizontal" style={{lineHeight:'50px',textAlign: 'left', color : 'red' ,fontSize: '40px'}} disabled>
+                <Menu.Item  mode="horizontal" style={{lineHeight:'50px',textAlign: 'left', color : 'red' ,fontSize: '40px'}} disabled>
                     <span>阿福博客</span>
                 </Menu.Item>
-                <Menu.Item key="mail">
+                <Menu.Item onClick={this.handleClick} key="mail">
                     <Icon type="mail" />
                     首页
                 </Menu.Item>
-                <Menu.Item key="app">
+                <Menu.Item onClick={this.handleClick} key="app">
                     <Icon type="appstore" />
                     个人日记
                 </Menu.Item>
-                <SubMenu
+                <SubMenu onClick={this.handleClick}
                     title={
                         <span className="submenu-title-wrapper">
               <Icon type="setting" />
@@ -126,16 +128,21 @@ class ManagerCenter extends Component {
                         <Menu.Item key="setting:4">Option 4</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
-                <Menu.Item key="alipay">
+                <Menu.Item onClick={this.handleClick} key="alipay">
                     <span>
                         留言板
                     </span>
                 </Menu.Item>
-                <Search
-                    placeholder="input search text"
-                    onSearch={value => console.log(value)}
-                    style={{ width: 200 }}
-                />
+
+                <Link to={`${match.url}/search`}>
+                    <Search
+                        placeholder="请输入想要搜索的文章标题"
+                        onSearch={value => {
+                            MailAction.fetchData({title:value})
+                        }}
+                        style={{ width: 250 }}
+                    />
+                </Link>
 
                     <Menu mode="horizontal" onClick={this.logout} style={{
                         float: 'right',
@@ -145,8 +152,10 @@ class ManagerCenter extends Component {
 
                         <SubMenu style={{width: 100}} title={<span><Icon type="user"/>{username}</span>}>
                             <Menu.Item key="logout" style={{width: '100%'}}>注销</Menu.Item>
+                            console.log(123)
                         </SubMenu>
                     </Menu>
+
             </Menu>
 
             </Header>
@@ -164,6 +173,8 @@ class ManagerCenter extends Component {
                         <Route path={`${match.url}/`} component={Mail} exact/>
                         <Route path={`${match.url}/mail`} component={Mail}/>
                         <Route path={`${match.url}/app`} component={Article} />
+                        <Route path={`${match.url}/search`} component={FindArticle} />
+
                     </Switch>
                 </Content>
 

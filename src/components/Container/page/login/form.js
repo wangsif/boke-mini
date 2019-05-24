@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
 
     handleSubmit(e){
         let _self = this;
-        e.preventDefault();
+        e.preventDefault();      //取消事件的默认动作。
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let {onSubmit} = this.props;

@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {Carousel, Layout} from "antd";
 const {Header, Content, Footer, Sider} = Layout;
+import MailAction from 'action/MailAction';
+import MainStore from 'store/MainStore';
 
 class Mail extends Component{
+
     render(){
         return(
             <Header style={{
@@ -30,6 +33,7 @@ class Mail extends Component{
             </Header>
         );
     }
+
 
 }
 export default Mail;

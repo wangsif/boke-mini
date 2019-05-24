@@ -61,7 +61,7 @@ RestAPI.init((responseJson) => Q.promise((resolve, reject) => {//简单的AOP扩
                         refreshToken: Config.getRefreshToken(),
                         jwt: Config.getJwt().substring(7)
                     };
-                    fetch('/api/manager/admin/auth/refreshToken', {
+                    fetch('/api/app/user/refreshToken', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json;charset=utf-8',
