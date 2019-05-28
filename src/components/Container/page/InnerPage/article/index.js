@@ -77,6 +77,7 @@ class Article extends Component{
                             />
                         }
                     >
+
                         <List.Item.Meta
                             avatar={<Avatar src={item.avatar} />}
                             title={<a href={item.href}>{item.title}</a>}
@@ -88,8 +89,11 @@ class Article extends Component{
 
                     </List.Item>
 
+
+
                 )}
             />
+
         );
     }
     componentDidMount() {

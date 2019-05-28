@@ -63,5 +63,7 @@ class ArticleStore{
                 .set('total', total)
         }));
     }
+    
+    
 }
 export default  alt.createStore(ArticleStore);

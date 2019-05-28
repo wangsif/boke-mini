@@ -7,6 +7,7 @@ import {map} from 'lodash/fp';
 import Article from '../../components/Container/page/InnerPage/article/index';
 import FindArticle from './page/InnerPage/article/findArticle/findArticle';
 import MailAction from  'action/MailAction';
+import AddArticle from './page/InnerPage/article/addArticle';
 
 import Config from 'app/common';
 import base from '../../assets/style/_variables/base.styl';
@@ -174,6 +175,7 @@ class ManagerCenter extends Component {
                         <Route path={`${match.url}/mail`} component={Mail}/>
                         <Route path={`${match.url}/app`} component={Article} />
                         <Route path={`${match.url}/search`} component={FindArticle} />
+                        <Route path={`${match.url}/setting:1`} component={AddArticle} />
 
                     </Switch>
                 </Content>
