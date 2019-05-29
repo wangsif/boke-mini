@@ -18,21 +18,10 @@ class ArticleStore{
                 pageSize: 3
             }),
             filter: Map({
-                area: '',
-                categoryInPaper: '',
-                createTime: '',
-                questionType: '',
-                classifyKnowledge: '',
-                description: '',
-                choose: '',
                 title: '',
-                paperIds: '',
-                score: '',
-                answer: '',
-                id: '',
-                limitedTime: '',
-                classifyKnowledgePath: '',
-                keyword: ''
+                content: '',
+                image: '',
+                createTime: '',
             }),
             editModal: {
                 show: false
@@ -51,6 +40,7 @@ class ArticleStore{
         this.setState(({article}) => ({
             article: article.set('pageNo', pageNo)
         }));
+        console.log(pageNo)
     }
 
 

@@ -13,12 +13,12 @@ class ArticleAction {
         return isLoding;
     }
     pageChange(pageNo) {
-        let {article, filter} =ArticleStore.getState();
+        let {article} =ArticleStore.getState();
 
         this.fetchData({
             pageNo: pageNo,
-            pageSize: article.get('pageSize')
-        }, filter.toJS());
+            pageSize: 3
+        });
 
         return pageNo;
     }

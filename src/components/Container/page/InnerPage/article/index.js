@@ -3,7 +3,6 @@ import ArticleStore from 'store/ArticleStore';
 import ArticleAction from 'action/ArticleAction';
 import {connect} from 'alt-react';
 import { Row, Col, List, Avatar, Icon } from 'antd';
-const listData = [];
 
 
 
@@ -21,17 +20,21 @@ class Article extends Component{
         this.state = {}
     }
     //翻页触发
-    pageChange = (page, pageSize) => {
-        let {current} = page;
-        ArticleAction.pageChange(current)
+    pageChange = (page) => {
+        let {pageNo} = page;
+        ArticleAction.pageChange(pageNo)
+        console.log(page)
     };
 
 
     render(){
 
         let _self = this;
-        let {article, filter, editModal, editQuestionDetailData, classify} = this.props;
+        let {article} = this.props;
         console.log(article.get('data').toArray())
+        console.log(article.get('total'))
+
+
 
 
         for (let i = 0; i < article.get('total'); i++) {
@@ -49,12 +52,14 @@ class Article extends Component{
             <List
                 itemLayout="vertical"
                 size="large"
+                onChange={_self.pageChange}
                 pagination={{
-                    onChange: page => {
-                        console.log(page);
-                    },
-                    pageSize: 3,
+                    total : article.get("total"),
+                    pageNo : article.get("pageNo"),
+                    pageSize: 3
+
                 }}
+
                 dataSource={article.get("data").toArray()}
                 // footer={
                 //     <div>
@@ -88,9 +93,6 @@ class Article extends Component{
                         {item.content}
 
                     </List.Item>
-
-
-
                 )}
             />
 
@@ -98,7 +100,8 @@ class Article extends Component{
     }
     componentDidMount() {
 
-        ArticleAction.fetchData({pageNo:"1", pageSize:"3"})
+        let {article} = this.props;
+        ArticleAction.fetchData({pageNo:article.get("pageNo"), pageSize:"3"})
     }
 }
 export default connect(Article, {
