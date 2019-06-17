@@ -17,8 +17,9 @@ class ArticleAction {
 
         this.fetchData({
             pageNo: pageNo,
-            pageSize: 3
+            pageSize: article.get('pageSize')
         });
+        console.log(pageNo)
 
         return pageNo;
     }

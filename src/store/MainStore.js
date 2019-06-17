@@ -1,10 +1,11 @@
 import alt from 'app/alt';
 import {Map, List} from 'immutable';
 import MailAction from 'action/MailAction';
+import React from 'react';
 class MainStore {
     constructor() {
-        this.state = this._getInitialState();
-        this.bindActions(MailAction);
+        this.state = this._getInitialState();             //定义state初始值的阶段
+        this.bindActions(MailAction);                  //监听action
     }
     _getInitialState() {
         return {
@@ -16,20 +17,17 @@ class MainStore {
                 pageSize: 3,
                 title: ''
             }),
-            editModal: {
-                show: false
-            },
-            editQuestionDetailData: null
+
         }
     }
+
+
 
     onLoading(isLoding) {
         this.setState(({article1}) => ({
             article1: article1.update('loading', v => isLoding)
         }));
     }
-
-
     onFetchData({article1, total}) {
         let data = article1;
         console.log(data)
@@ -39,5 +37,24 @@ class MainStore {
                 .set('total', total)
         }));
     }
+
+    onPageChange(pageNo,title) {
+
+        this.setState(({article1}) => ({
+            article1: article1.set('pageNo', pageNo),
+            title : title
+        }));
+        console.log(title)
+        console.log(pageNo)
+    }
+
+    onUpdateTitle(title){
+        this.setState(({article1}) => ({
+            article1: article1.set('title',title),
+        }));
+        console.log(title)
+    }
+
+
 }
 export default  alt.createStore(MainStore);

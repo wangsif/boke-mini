@@ -1,17 +1,37 @@
 import alt from 'app/alt';
 import RestAPI from 'utils/rest-api';
 import {message} from 'antd';
-import Config from 'app/common';
+import ArticleStore from "../store/ArticleStore";
 
 class MailAction {
+
     constructor(){
-        this.generateActions( 'isLoading')
+        this.generateActions('showEditModal', 'isLoading','title')   //注册action名字
     }
+
     loading(isLoding){
         return isLoding;
     }
+    updateTitle(title){
+        console.log(title)
+        return title;
+    }
 
-    fetchData({pageNo=1,pageSize=3,title}) {
+
+    pageChange(pageNo,title) {
+
+        this.fetchData({
+            pageNo: pageNo,
+            pageSize: 3,
+            title:title
+
+        });
+        console.log(pageNo)
+
+        return pageNo,title;
+    }
+
+    fetchData({pageNo,pageSize,title}) {
         let _self = this;
         return function (dispatch) {
             _self.loading(true)
@@ -24,6 +44,7 @@ class MailAction {
                     let data = {
                         article1: res.articles,
                         total: res.total,
+                        title:title
                     };
                     console.log(data)
                     dispatch(data);
@@ -33,6 +54,8 @@ class MailAction {
                 });
         }
     }
+
+
 }
 export default alt.createActions(MailAction)
 

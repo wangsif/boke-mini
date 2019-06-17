@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from 'alt-react';
-import { Row, Col, List, Avatar, Icon } from 'antd';
-import MailAction from "action/MailAction";
-import MainStore from "store/MainStore";
+import {connect} from 'alt-react';         //联系到alt
+import {Row, Col, List, Avatar, Icon, Pagination} from 'antd';
+import MailAction from 'action/MailAction';
+import MainStore from 'store/MainStore';
 const listData = [];
 
 
@@ -18,21 +18,23 @@ class FindArticle extends Component{
     constructor(props) {
         super(props);
         this.state = {}
-    }
-    // //翻页触发
-    // pageChange = (page, pageSize) => {
-    //     let {current} = page;
-    //     ArticleAction.pageChange(current)
-    // };
+        this.pageChange = this.pageChange.bind(this)
 
+    }
+    //翻页触发
+    pageChange = (page) => {
+        console.log(1111)
+        let {pageNo,title} = page;
+        console.log(title)
+        MailAction.pageChange(pageNo,title.title)
+        console.log(page)
+        console.log(title)
+    };
 
     render(){
 
         let _self = this;
-        let {article1, filter, editModal, editQuestionDetailData, classify} = this.props;
-        console.log(article1.get('data').toArray())
-
-
+        let {article1} = this.props;
         for (let i = 0; i < article1.get('total'); i++) {
             article1.get('data').push({
                 href: '',
@@ -41,62 +43,68 @@ class FindArticle extends Component{
                 createTime:'',
                 content:
                     '',
+                image:''
             });
         }
+
         return(
+            <div>
+                <List
+                    itemLayout="vertical"
+                    size="large"
+                    dataSource={article1.get("data").toArray()}
 
-            <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                    onChange: page => {
-                        console.log(page);
-                    },
-                    pageSize: 3,
-                }}
-                dataSource={article1.get("data").toArray()}
-                // footer={
-                //     <div>
-                //         <b>ant design</b> footer part
-                //     </div>
-                // }
-                renderItem={item => (
-                    <List.Item
-                        key={item.title}
-                        actions={[
-                            <IconText type="star-o" text="156" />,
-                            <IconText type="like-o" text="156" />,
-                            <IconText type="message" text="2" />,
-                        ]}
-                        extra={
-                            <img
-                                width={272}
-                                alt="logo"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+
+                    // footer={
+                    //     <div>
+                    //         <b>ant design</b> footer part
+                    //     </div>
+                    // }
+                    renderItem={item => (
+                        <List.Item
+                            key={item.title}
+                            actions={[
+                                <IconText type="star-o" text="156" />,
+                                <IconText type="like-o" text="156" />,
+                                <IconText type="message" text="2" />,
+                            ]}
+                            extra={
+                                <img
+                                    width={272}
+                                    alt="logo"
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                                />
+                            }
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src={item.avatar} />}
+                                title={<a href={item.href}>{item.title}</a>}
+                                createTime ={item.createTime}
+                                content={item.content}
                             />
-                        }
-                    >
-                        <List.Item.Meta
-                            avatar={<Avatar src={item.avatar} />}
-                            title={<a href={item.href}>{item.title}</a>}
-                            createTime ={item.createTime}
-                            content={item.content}
-                        />
-                        发布时间： {item.createTime}<br/>
-                        {item.content}
+                            发布时间： {item.createTime}<br/>
+                            {item.content}
 
-                    </List.Item>
+                        </List.Item>
 
-                )}
-            />
+                    )}
+                />
+                <Pagination defaultCurrent={1}  defaultPageSize={3} total={article1.get('total')} onChange={(page, pageSize)=>{
+                    this.pageChange({pageNo:page, pageSize,title:article1.get("title")})
+                    console.log(page)
+                }}/>
+
+            </div>
         );
     }
 
     componentDidMount() {
-
-        MailAction.fetchData({pageNo:"1", pageSize:"3",title:""})
+        let {article1} = this.props;
+        MailAction.fetchData({pageNo: article1.get('pageNo'),
+            pageSize: "3",title:article1.get('title')})
     }
 }
+
 export default connect(FindArticle, {
     listenTo() {
         return [MainStore];

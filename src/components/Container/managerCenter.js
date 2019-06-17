@@ -21,6 +21,7 @@ import Mail from "./page/InnerPage/mail";
 const TabPane = Tabs.TabPane;
 
 class ManagerCenter extends Component {
+
     state = {
         current: 'mail',
         collapsed: false,
@@ -139,8 +140,11 @@ class ManagerCenter extends Component {
                     <Search
                         placeholder="请输入想要搜索的文章标题"
                         onSearch={value => {
-                            MailAction.fetchData({title:value})
+                            MailAction.fetchData({pageNo:1,pageSize:3,title:value})
+                            MailAction.updateTitle({title:value})
+                            console.log(value)
                         }}
+
                         style={{ width: 250 }}
                     />
                 </Link>
@@ -156,9 +160,7 @@ class ManagerCenter extends Component {
                             console.log(123)
                         </SubMenu>
                     </Menu>
-
             </Menu>
-
             </Header>
 
 
