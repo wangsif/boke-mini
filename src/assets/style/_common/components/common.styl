@@ -1,0 +1,376 @@
+
+.loading {
+  transition: opacity .3s linear;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: block;
+  text-align: center;
+  top: 0;
+  background-color: transparent; //背景透明
+  z-index: 10;
+  &:after {
+    content: "";
+    display: inline-block;
+  }
+}
+
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .65);
+}
+.message-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-outter {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  display: inline-block;
+  background-color: $font-blue;
+  width: 40%;
+  transform: translate(-50%, -50%);
+  padding: 20px
+}
+.message-outter {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  display: inline-block;
+  width: 400px;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #FFF;
+  color: #2A2A2A;
+}
+
+.loading-wrap {
+  height: 50px;
+  width: 100%;
+  font-size: 21px;
+  color: #fff;
+  text-align: left;
+  line-height: 50px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.loading-rect {
+  height: .18rem;
+  width: .18rem;
+  background-color: #FD404A;
+  border-radius: .05rem;
+  -webkit-transform: rotate3D(0, 0, 1, 45deg);
+  position: absolute;
+  left: .28rem;
+  top: .28rem;
+}
+
+.loading-text {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  margin-bottom: 15px;
+  line-height: 30px;
+  margin-top: 20px
+}
+.message-text {
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 15px;
+  line-height: 30px;
+  margin-top: 20px
+}
+.message-color{
+  background-color : #2A2A2A;
+  color :$white;
+  display :inline-block;
+  height :20px;
+  border-radius :3px;
+  line-height :18px;
+  padding: 0 10px;
+}
+.message-body-btn{
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 10px;
+}
+.modalClose {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: $white;
+  padding: 5px 15px;
+}
+
+.loading-enter,
+.loading-leave-active {
+  opacity: 0;
+}
+
+.sideBarLi {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  display: inline-block;
+  transform: translateY(-50%);
+}
+
+.sideBar {
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  margin: 0 auto 5px;
+}
+
+.appCardBody {
+  background-color: $white;
+  padding: 20px;
+  z-index: 999;
+  width: 400px;
+}
+
+.appCardImg {
+  height: 128px;
+  width: 128px;
+}
+
+.sideLi {
+  height: 70px;
+  width: 70px;
+  font-size:12px;
+  background-color: #fff;
+  padding: 5px;
+  color: $font-blue;
+  border: 1px solid rgba(170, 170, 170, 0.1);
+  cursor: pointer
+}
+
+.sideLi:hover {
+  background-color: $font-blue;
+  color: $white
+
+}
+
+.homePageFooter {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  background: #0c1828;
+  padding: 20px 0;
+  line-height: 30px;
+}
+
+//tabs样式
+.tabsBody {
+  color: $font-white;
+  font-size: 12px;
+  height: 100%;
+}
+
+.tabsTitle {
+  width: 40px;
+  height: 102%;
+  margin-top: -2px;
+}
+.TabIcon{
+  color:$white;
+  font-size :20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  cursor :pointer;
+}
+.TabIcon:hover{
+  color :$orange
+}
+.TabIconDiv:hover{
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+.TabIconDiv:active{
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+.tabsTitleHorizontal{
+  height :35px;
+  margin-right :-3px;
+  margin-left :-3px;
+}
+.tabsKey {
+  height: 50%;
+  padding: 5px;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+  line-height :18px
+}
+.tabsHorizontalItem{
+  padding: 0 10px;
+  background: #ddd;
+  height: 35px;
+  border: none;
+  position: absolute;
+  top: 0;
+  cursor :pointer;
+}
+.leftTab{
+  right: 66%;
+}
+.rightTab{
+  left: 66%;
+}
+.centerTab{
+  left: 40%;
+}
+.tabsKeySelect {
+  background-color: $tab-select;
+}
+
+.tabsKeyNoSelect {
+  background-color: $play-back-85
+}
+
+.tabsTitleName {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid $tab-select;
+  font-size: 0;
+  line-height: 0;
+}
+.arrowPlay {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid $tab-select;
+  font-size: 0;
+  line-height: 0;
+}
+.arrow-play-hall{
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #0d1a2b;
+  font-size: 0;
+  line-height: 0;
+  margin-left: 20px;
+}
+.tabsContent{
+  width :620px;
+  height :100%;
+}
+.tabsContentBottom{
+  height :40px;
+  width 100%;
+  border-top: 1px solid $border-white;
+  line-height: 40px
+}
+.borderBottom{
+  height :40px;
+  width 100%;
+  border-bottom: 1px solid $border-white;
+  line-height: 40px
+}
+.tabsContentRight{
+  height :180px;
+  width 100%;
+}
+.cartLi{
+  height: 30px;
+  line-height: 30px;
+  color :$border-white;
+  cursor :pointer
+}
+.cartLi:hover{
+  color :$white
+}
+.cartStyleLi {
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.noData{
+  height :140px;
+  width :100%;
+}
+//tabs样式
+//loadding样式
+.loading-body{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255,255,255,0.15);
+}
+.Loading{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -20px;
+  width: 45px;
+  height: 45px;
+  border: 3px solid;
+  border-color: #333 #333 transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: loadingPlay 1s linear infinite;
+}
+@keyframes loadingPlay{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loadingPlay{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loadingPlay{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+//loadding样式

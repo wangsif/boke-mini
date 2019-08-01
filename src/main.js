@@ -28,6 +28,7 @@ import 'antd/dist/antd.css';
 import './assets/style';
 
 
+
 //引入字体样式
 //require('font-awesome-webpack');
 
@@ -102,7 +103,7 @@ const Manager = () => (
 
 const app = () =>
     <div>
-        <Route path='/' component={Login} exact/>
+        <Route path='/' component={Manager} exact/>
         <Route path='/login' component={Login}/>
         <Route path='/home' component={Manager}/>
     </div>

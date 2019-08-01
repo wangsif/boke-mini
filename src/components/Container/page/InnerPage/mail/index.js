@@ -43,7 +43,7 @@ class Mail extends Component{
                          marginLeft: 'auto',
                          marginRight: '150px',
                          marginTop : '-50px',}}
-                cover={<img alt="example" src="http://wangsf.xyz/images/timg_(8).jpg" />}
+                cover={<img alt="example" src="http://wangsf.xyz/images/20190618094520.jpg" />}
             >
                 <Meta title="每日鸡汤" description="啊！多打代码，真是开心呀！打代码！变牛逼！" />
             </Card>

@@ -1,0 +1,174 @@
+
+.loginForm {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  width: 27.5%;
+  z-index: 1;
+  opacity: 1;
+  transition: none;
+}
+
+.loginFormInput {
+  width: 100%;
+  z-index: $zindex-0;
+  text-align: center;
+  opacity: 1;
+  transition: none;
+}
+.loginBody {
+  position: relative;
+}
+.headerLogoNew {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%
+}
+.loginFormInputBody {
+  width: 100%;
+  margin-top: 20px;
+  z-index: 54;
+  opacity: 1;
+  background: $white
+  padding: 14% 14% 0;
+  border-radius: 5px;
+}
+
+.userName {
+  font-size: 15px;
+  color: $font-color;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  height:25px
+}
+.checkCode{
+  font-size: 15px;
+  color: $font-color;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  height:25px;
+  float:left;
+  line-height 25px;
+}
+.userNameInput {
+  font-size:14px;
+  display: inline-block;
+  width: 80%;
+  border: none;
+  height :25px;
+  color :$bottom-border;
+  border-bottom :1px solid  #aaa;
+}
+.passFocus:focus{
+  border-bottom : 1px solid  #4fabf1;
+}
+.userFocus:focus{
+  border-bottom : 1px solid  #4fabf1;
+}
+.checkFocus:focus{
+  border-bottom : 1px solid  #4fabf1;
+}
+.checkCodeImg{
+  width: 30%;
+  height: 39px;
+  border: 1px solid;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  cursor:pointer;
+}
+.checkCodeInput{
+  float :left;
+  width:46%;
+}
+.checkCodeContainer{
+  position: relative;
+}
+.rememberPassword {
+  width: 50%
+  display: inline-block;
+  float :left;
+  height: 30px;
+  font-size: 15px;
+  position: relative;
+}
+input[type=checkbox] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+}
+input[type=checkbox]::before{
+  content: '\a0';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid $bottom-border;
+  top: 0;
+  left: 0
+}
+input[type=checkbox]:checked::before {
+  content: '\2714';
+  font-weight :600;
+  color :$font-blue;
+}
+.passwordText{
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 22px;
+  cursor :pointer
+}
+.forgetPassword{
+  text-align :right;
+  color :$font-blue;
+  cursor :pointer;
+}
+.loginBtn{
+  width :85%;
+  height :40px;
+  text-align :center;
+  border:none;
+  color:$white;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background :$btn-blue;
+  cursor :pointer
+}
+.loginBtn:hover{
+  background: linear-gradient(to right,#91c2f5,#3c98f5);
+}.loginBtn:active{
+   background: linear-gradient(to right,#91c2f5,#3c98f5);
+ }
+.loginBtn:disabled{
+  background:#CCC!important;
+}
+.flexBox{
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex: auto;
+  flex: auto;
+}
+.registerText{
+  color :$bottom-border;
+  font-size: 14px;
+}.goLoginText{
+   color :$font-blue;
+   font-size: 14px;
+   cursor :pointer
+ }
+.btnHeight{
+  height: 100px;
+}

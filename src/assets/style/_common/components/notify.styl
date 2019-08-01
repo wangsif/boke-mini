@@ -1,0 +1,138 @@
+.notify-body {
+  width: 100%;
+  height: 46px;
+  background-color: #333b4a;
+  text-align: center;
+  line-height: 45px;
+  box-shadow: 0 0 5px #999 inset;
+  color: #FFF;
+  font-family :SourceHanSansCN-Light;
+}
+
+.notify-detail {
+  height: 454px;
+  width 100%;
+  box-shadow: 0 0 1px #999;
+  background: #FFF;
+}
+
+.notify-title {
+  background-color:#132033;
+  height: 30px;
+  line-height: 30px;
+  color: $border-white;
+}
+
+.notify-title-time {
+  width: 25%;
+  height: 100%;
+  text-align: center;
+  overflow :hidden;
+}
+
+.notify-title-content {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+
+}
+.detail-body{
+  width:534px;
+  border: 1px solid rgba(255,255,255,0.1);
+  height: 100%;
+  padding:24px 30px 0 30px;
+  color:$border-white;
+  line-height: 25px;
+  .detail-title{
+    width:100%;
+    font-family:SourceHanSansCN-Regular;
+    font-size:20px;
+    color:#333;
+    margin-bottom :20px;
+  }
+  .detail-date{
+    width: 100%;
+    font-family :SourceHanSansCN-Light;
+    font-size:12px;
+    color: #999;
+    margin-bottom :20px;
+  }
+  .detail-content{
+    width:100%;
+    font-family :SouceHanSansCN-Lignt;
+    font-size:14px;
+    color: #666;
+    word-break:break-all;
+  }
+}
+.notify-ul {
+  width: 320px;
+  height:100%;
+  overflow-x :hidden;
+  overflow-y:auto;
+}
+.notify-left-container{
+  border-right:1px solid #e6e6e6;
+}
+
+.notify-li {
+  height: 62px;
+  padding: 12px 30px 12px 40px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color:$border-white;
+  cursor :pointer;
+  border-bottom :1px solid #e6e6e6;
+  position: relative;
+  .notify-content-date{
+    font-family :SourceHanSansCN-Light;
+    font-size:12px;
+    color: #999;
+  }
+  .notify-content-title{
+    width:250px;
+    color: #444;
+    text-align:left;
+    font-size:16px;
+    margin-bottom 14px;
+    font-family :SourceHanSansCN-Normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+.notify-li:hover{
+  background-color:#eaebed;
+}
+.notify-arc{
+  width:100%;
+  height:100%;
+  position: relative;
+}
+.notify-li:hover .notify-arc:before{
+  width:0;
+  height:0;
+  border-width 6px;
+  border-style :solid;
+  border-color :transparent transparent transparent #eaebed;
+  position: absolute;
+  right:-43px;
+  top:50%;
+  margin-top:-6px;
+  content:"";
+}
+.notify-selected{
+  background: #eaebed;
+  &:before{
+    width:0;
+    height:0;
+    border-width 6px;
+    border-style :solid;
+    border-color :transparent transparent transparent #eaebed;
+    position: absolute;
+    right:-13px;
+    top:50%;
+    margin-top:-6px;
+    content:"";
+  }
+}

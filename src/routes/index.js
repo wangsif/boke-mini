@@ -18,7 +18,7 @@ const Manager = () => (
 
 const app = () =>
     <div>
-        <Route path='/' component={Login} exact/>
+        <Route path='/' component={Manager} exact/>
         <Route path='/login' component={Login}/>
         <Route path='/home' component={Manager} exact/>
     </div>

@@ -58,19 +58,19 @@ const Main = {
         }
     },
 
-    setUserInfo(userInfo){
-        sessionStorage
-            .setItem(CACHE_USER_INFO_ALIAS, JSON.stringify(userInfo));
-    },
-    getUserInfo(){
-        let userInfo = JSON.parse(sessionStorage.getItem(CACHE_USER_INFO_ALIAS));
-        if (!userInfo) {
-            browserHistory.push('/login');
-            return;
-        }
-
-        return userInfo;
-    },
+    // setUserInfo(userInfo){
+    //     sessionStorage
+    //         .setItem(CACHE_USER_INFO_ALIAS, JSON.stringify(userInfo));
+    // },
+    // // getUserInfo(){
+    // //     let userInfo = JSON.parse(sessionStorage.getItem(CACHE_USER_INFO_ALIAS));
+    // //     if (!userInfo) {
+    // //         browserHistory.push('/login');
+    // //         return;
+    // //     }
+    //
+    //     return userInfo;
+    // },
     setSessionStorage(key, value){
         sessionStorage.setItem(key, JSON.stringify(value));
     },

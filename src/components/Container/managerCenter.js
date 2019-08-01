@@ -11,6 +11,7 @@ import AddArticle from './page/InnerPage/article/addArticle';
 
 import Config from 'app/common';
 import base from '../../assets/style/_variables/base.styl';
+import Type1 from '../../components/Container/page/InnerPage/lch/index';
 const {Header, Content, Footer, Sider} = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -79,9 +80,9 @@ class ManagerCenter extends Component {
 
 
     render() {
-        let userInfo = Common.getUserInfo();
+        // let userInfo = Common.getUserInfo();
 
-        let username = userInfo == null ? '' : userInfo.username;
+        // let username = userInfo == null ? '' : userInfo.username;
 
         let {selectMenu} = this.state;
         let {match, location,activeKey,panes} = this.props;
@@ -130,9 +131,9 @@ class ManagerCenter extends Component {
                         <Menu.Item key="setting:4">Option 4</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
-                <Menu.Item onClick={this.handleClick} key="alipay">
+                <Menu.Item onClick={this.handleClick} key="Liuhe">
                     <span>
-                        留言板
+                        老姐给你的六合统计
                     </span>
                 </Menu.Item>
 
@@ -149,17 +150,17 @@ class ManagerCenter extends Component {
                     />
                 </Link>
 
-                    <Menu mode="horizontal" onClick={this.logout} style={{
-                        float: 'right',
-                        lineHeight: '50px',
-                        textAlign: 'center'
-                    }}>
+                    {/*<Menu mode="horizontal" onClick={this.logout} style={{*/}
+                        {/*float: 'right',*/}
+                        {/*lineHeight: '50px',*/}
+                        {/*textAlign: 'center'*/}
+                    {/*}}>*/}
 
-                        <SubMenu style={{width: 100}} title={<span><Icon type="user"/>{username}</span>}>
-                            <Menu.Item key="logout" style={{width: '100%'}}>注销</Menu.Item>
-                            console.log(123)
-                        </SubMenu>
-                    </Menu>
+                        {/*<SubMenu style={{width: 100}} title={<span><Icon type="user"/>{username}</span>}>*/}
+                            {/*<Menu.Item key="logout" style={{width: '100%'}}>注销</Menu.Item>*/}
+                            {/*console.log(123)*/}
+                        {/*</SubMenu>*/}
+                    {/*</Menu>*/}
             </Menu>
             </Header>
 
@@ -178,6 +179,7 @@ class ManagerCenter extends Component {
                         <Route path={`${match.url}/app`} component={Article} />
                         <Route path={`${match.url}/search`} component={FindArticle} />
                         <Route path={`${match.url}/setting:1`} component={AddArticle} />
+                        <Route path={`${match.url}/liuhe`} component={Type1} />
 
                     </Switch>
                 </Content>

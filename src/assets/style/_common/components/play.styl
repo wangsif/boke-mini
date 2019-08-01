@@ -1,0 +1,1566 @@
+.notice {
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 0 50px;
+}
+
+.noticeIcon {
+  position: absolute;
+  left: 70px;
+  font-size: 20px;
+  line-height: 45px;
+}
+
+.noticeText {
+  position: absolute;
+  left: 120px;
+  font-size: 18px;
+  line-height: 45px;
+}
+
+.marquee {
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  0% {
+    text-indent: 20em
+  }
+  100% {
+    text-indent: -105em
+  }
+}
+.marquee:hover {
+  animation-play-state: paused
+}
+
+.microsoft {
+  font: 15px 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+  height: 40px;
+  line-height: 40px;
+  overflowX: hidden;
+  width: 80%;
+  color: $black
+}
+
+.playHeader {
+  height: 50px;
+  background-color: $play-back-85;
+
+}
+
+.headerLogo {
+  height: 100%;
+  width: 20%;
+  float: left;
+}
+
+.headerLogoImg {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.headerBody {
+  width: 1150px;
+  margin: 0 auto;
+  display: inline-block;
+  height: 100%;
+}
+
+.headerLeft {
+  width: 40%;
+  display: inline-block;
+  height: 100%;
+  float: left
+}
+
+.homeLi {
+  width: 78%;
+  display: inline-block;
+  height: 100%;
+  margin-left: 2%;
+}
+
+.activeHeader {
+  float: left;
+  height: 100%;
+  color: $font-white;
+  width: 20%;
+  line-height: 50px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.activeHeader:hover {
+  color: $orange;
+  cursor: pointer;
+}
+
+.activeHeader:active {
+  color: $orange;
+  cursor: pointer;
+}
+
+.liItem {
+  height: 20px;
+  margin: 15px auto;
+  border-left: 1px solid $font-white;
+  line-height: 20px;
+}
+
+.liItemFirst {
+  height: 20px;
+  margin: 15px auto;
+  line-height: 20px;
+}
+
+.headerRight {
+  display: inline-block;
+  width: 60%;
+  height: 100%;
+  float: left;
+}
+
+.headerRightItem {
+  height: 100%;
+  display: inline-block;
+  line-height: 50px;
+  font-size: 14px;
+  overflow: hidden;
+  color: $font-white;
+}
+
+.personCenter {
+  width: 18%;
+  cursor: pointer;
+  line-height: 50px
+}
+
+.personCenter > div {
+  display: inline-block
+}
+
+.UserIcon {
+  width: 30%;
+  text-align: right;
+  position: relative;
+  height: 50px;
+}
+.refresh-balance{
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  cursor :pointer;
+  color :$orange
+}
+.refresh-balance:hover{
+  color :$white
+}
+.trashCart {
+  height: 18px;
+  width: 18px;
+}
+
+.headerBalance {
+  width: 27%;
+  cursor: pointer;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.headerBalance > div {
+  display: inline-block
+}
+
+.userNameItem {
+  width: 16%
+}
+
+.userNameItem > div {
+  display: inline-block
+}
+
+.userNameItemImg {
+  height: 20px;
+  width: 25%;
+  border-radius: 10px;
+  bottom: 15px;
+  margin-left: 5%;
+}
+
+.UserIconContainImg {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  bottom: 15px;
+  margin-right: 5px;
+}
+.userNameValue{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align:left;
+  width: 69%;
+}
+.rechargeBtn {
+  height: 30px;
+  line-height: 30px;
+  background-color: $orange;
+  color: $font-white;
+  margin: 10px auto;
+  width: 60px;
+  cursor: pointer
+}
+.withdraw:hover{
+  background-color #46ADEE !important;
+}
+.withdraw {
+  background-color:#4993F7 !important;
+  margin-left: 10px
+}
+.rechargeBtn:hover{
+  background-color: #FF944C;
+}
+
+.serviceHeader {
+  width: 60px;
+  text-align: right;
+}
+
+.userLogo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 5px;
+  height: 18px;
+  width: 18px;
+  border-radius :9px
+}
+
+.playContent {
+  font-size: 14px;
+  color: $white;
+  width: 1196px;
+  margin: 0 auto 30px;
+}
+
+.playContentBody {
+  background-color: $play-back-op
+}
+
+.lotteryOrderBody {
+  height: 550px;
+}
+
+.lotteryBody {
+  width: 100%;
+  height: 515px;
+  padding: 0 3px;
+}
+
+.openLotteryItemRecent {
+  margin-right: 2px
+}
+
+.lotteryDetail {
+  width: 100%;
+  height: 100%;
+  background-color: $play-back-op;
+}
+
+.activityDetail {
+  width: 334px;
+  background-color: rgba(34,44,56,0.75);
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 145px;
+}
+
+.playContent > div {
+  display: inline-block;
+  float: left
+}
+
+.playContentLeft {
+  width: 180px;
+  height: 100%;
+  margin-right: 8px;
+}
+
+.playContentCenter {
+  width: 660px;
+  height: 100%;
+  margin-right: 8px;
+}
+
+.playContentRight {
+  width: 340px;
+  height: 100%
+}
+
+.lotteryCardTitle {
+  height: 35px;
+  background: $play-back-85;
+  font-size: 16px;
+  line-height: 35px;
+}
+
+.lotteryCardDetail {
+  background: $play-back-op;
+  color: $font-white;
+  font-size: 12px;
+  padding: 10px 3px;
+}
+
+.lotteryCardName {
+  height: 25px;
+  display: inline-block;
+  width: 84px;
+  line-height: 25px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.lotteryCardName:hover{
+  background: #4993F7
+}
+.back-lottery-card{
+  background: #4993F7
+}
+.playContentTitle {
+  height: 80px;
+  width: 100%;
+}
+
+.playContentTitleImg {
+  display: inline-block;
+  height: 100%;
+  width: 150px;
+  float: left;
+  position: relative
+}
+
+.playTitleExpect {
+  display: inline-block;
+  height: 100%;
+  width: 340px;
+  float: left;
+}
+
+.playTitleTime {
+  display: inline-block;
+  height: 100%;
+  width: 170px;
+  float: left;
+}
+
+.arrowImg {
+  position: absolute;
+  top: 0;
+  left: -10px;
+  height: 100%
+}
+
+.playEchart {
+  margin-top: 10px;
+  height: 220px;
+  width: 100%;
+  background-color: $play-back-op;
+}
+
+.arrowTitle {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0
+}
+
+.playName {
+  height: 50%;
+  line-height: 30px;
+  font-size: 16px;
+  width: 85%;
+}
+
+.playNameItem {
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.playTitleExpectTop {
+  height: 50%;
+  line-height: 40px
+}
+
+.playTitleExpectTop > div {
+  display: inline-block;
+  padding: 0 10px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: $play-back-65;
+  line-height: 20px;
+  font-size: 12px
+}
+
+.playTitleExpectBottom {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleItem {
+  display: inline-block;
+  background-color: $btn;
+  border: 1px solid $play-back-85;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  line-height: 38px;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.openLotteryItem {
+  display: inline-block;
+  background-color: $btn;
+  border: 1px solid $play-back-85;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  line-height: 38px;
+  font-size: 22px;
+  margin-right: 10px;
+  -webkit-animation: spin 2s linear 2s 5 alternate;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateY(360deg);
+  }
+}
+
+.playTitleTimeSquare {
+  display: inline-block;
+  background-color: $btn;
+  border: 2px solid  $play-back-85;
+  height: 100%;
+  width: 132px;
+  border-radius: 13px;
+  line-height: 36px;
+  font-size: 22px;
+}
+
+.squareItem {
+  display: inline-block;
+  background-color: $btn;
+  border: 1px solid $play-back-85;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  line-height: 40px;
+  font-size: 22px;
+  margin-right: 5px;
+}
+  .squareItemAnimals{
+    display: inline-block;
+    background-color: $btn;
+    border: 1px solid $play-back-85;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    line-height: 30px;
+    font-size: 16px;
+    margin-left:5px;
+    margin-right: 10px;
+  }
+
+.tabBody {
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.tabSecondBody {
+  background: rgba(16, 29, 46, 0.85);
+  height: 40px;
+  width: 100%;
+  background-color: $play-back-85;
+
+}
+
+.tabSecondBodySub {
+  height: 40px;
+  width: 100%;
+}
+
+.scrollbar {
+  overflow-x: auto
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 1px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: $btn-blue;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: none;
+}
+
+.tabSecondBodySub > div {
+  display: inline-block;
+  height: 100%;
+  font-size: 15px;
+  float: left;
+  line-height: 40px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.tabBody > div {
+  display: inline-block;
+  width: 90px;
+  height: 100%;
+  font-size: 15px;
+  float: left;
+  line-height: 40px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  cursor: pointer
+}
+
+.playBody {
+  height: 440px;
+  width: 100%;
+  min-height:400px;
+  position: relative;
+}
+
+.gameRule {
+  height: 40px;
+  line-height: 20px;
+  font-size: 12px;
+  color: $border-white;
+  -webkit-transform: scale(0.90);
+  transform: scale(0.9);
+}
+
+.playBodyHeight {
+  height: 320px;
+  overflow-y: auto
+}
+
+.playBodyHeightDetail {
+  height: 280px;
+}
+
+.playBodyHeightDetailPd20 {
+  padding: 15px;
+  height: 240px;
+}
+
+.UserIconContain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 5px;
+  height: 18px;
+  width: 18px;
+}
+
+.playRuleDetail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  cursor: pointer;
+}
+
+.playTextarea {
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: 1px solid $border-white;
+  border-radius: 3px;
+  color: $font-white;
+}
+
+playTextarea::-webkit-input-placeholder {
+  color: $font-white;
+}
+
+.playContentBottom {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid $border-white
+}
+
+
+.closeBetModal {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(34, 44, 56, 0.9);
+  z-index: 9;
+  line-height: 80px;
+  font-size: 24px;
+}
+.leftContent{
+  width:50%;
+  float: left;
+  text-align: center;
+  margin-bottom :10px;
+}
+.leftContent:nth-of-type(1) {
+  border-right :1px solid #eaeaea;
+}
+.betInput::-webkit-input-placeholder{
+  color:#FFF;
+  font-size:14px;
+}    /* 使用webkit内核的浏览器 */
+.betInput:-moz-placeholder{
+  color:#FFF;
+  font-size:14px;
+}                  /* Firefox版本4-18 */
+.betInput::-moz-placeholder{
+  color:#FFF;
+  font-size:14px;
+}                  /* Firefox版本19+ */
+.betInput:-ms-input-placeholder{
+  color:#FFF;
+  font-size:14px;
+}
+
+//弹框样式
+.playModalBody {
+  width: 100%;
+  min-height:1px;
+  top: 270px;
+  z-index: 21;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 0;
+  border-width: 0;
+  border-style: solid;
+  text-align: center;
+  line-height: 20px;
+  font-weight: normal;
+  font-style: normal;
+  opacity: 1;
+}
+.play-modal-hall {
+  position: absolute;
+  width: 400px;
+  top: 40px;
+  z-index: 21;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 0;
+  border-width: 0;
+  border-style: solid;
+  text-align: center;
+  line-height: 20px;
+  font-weight: normal;
+  font-style: normal;
+  opacity: 1;
+  transition: none;
+}
+
+.playModalDiv {
+  width: 100%;
+  padding: 5px;
+  background-color: rgba(34,44,56,0.85);
+  color: #FFF;
+}
+.play-modal-hall-body {
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  background-color: #0d1a2b;
+  border-radius: 5px;
+}
+
+.playModalFirst {
+  color: $orange;
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+
+.playModalSecond {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+.play-modal-hall-item {
+  display: inline-block;
+  width: 80%;
+  text-align: left;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.playModalSecond > div {
+  float:left;
+  display: inline-block;
+  margin-left :30px;
+  margin-right :30px;
+  text-align: left;
+  cursor: pointer;
+  height: 28px;
+  line-height: 28px;
+}
+
+.playModalSecondItem {
+  display: inline-block;
+  margin-bottom :10px;
+  color :$white;
+  width :30%;
+}
+.playColumnName{
+  width:10%;
+  height:28px;
+  line-height:28px;
+  text-align :center;
+}
+.playColumnValue{
+  width:89%;
+  cursor: pointer;
+  margin-left:1%;
+}
+.playColumns{
+  width: 110px;
+  height:28px;
+  line-height: 28px;
+  text-align :left;
+  margin-right:30px;
+  border-radius :10px;
+}
+.playColumns:hover{
+  color: #70CFB7;
+}
+.playColumnsSelected{
+  color: #70CFB7;
+}
+.seemAddChase {
+  height: 30px;
+  width: 100px;
+  margin-right: 10px;
+  border: none;
+  color: $white;
+  box-shadow: rgb(170, 170, 170) 0px 3px 8px, rgb(255, 255, 255) 0px 2px 3px inset;
+}
+.clearfix:after{
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix {
+  /* 触发 hasLayout */
+  zoom: 1;
+}
+
+//弹框样式
+
+//玩法样式
+.openLotteryItemNowUnit {
+  float: left;
+  width: 10%
+  display: inline-block;
+  font-size: 14px;
+  color: $font-white;
+  line-height: 32px
+}
+
+.playItemBody {
+  margin-top: 17px;
+}
+
+.playItemNumOrText {
+  display: inline-block;
+  width: 90%;
+  float: left;
+  position: relative;
+}
+
+.playNumStyle {
+  float: left;
+  width: 69%;
+  text-align: left;
+}
+
+.playNumStyleOp {
+  width: 31%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.openLotteryItemNowSelect {
+  background: linear-gradient(to bottom, #60a9f3, #2690fb);
+  color: $white
+}
+
+.openLotteryItemNow {
+  background-color: $white;
+  color: #333;
+}
+
+.equalItem {
+  line-height: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.playResultAddUnitItem {
+  line-height: 23px;
+  height: 23px;
+  width: 23px;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.openLotteryItemNowClear {
+  height: 25px;
+  width: 25px;
+  line-height: 23px;
+  margin-right: 5px;
+  font-size: 14px;
+  background-color: #edf7ff;
+  color: #0c9ef7;
+  cursor: pointer;
+  border-radius: 13px;
+  display: inline-block;
+}
+
+.openLotteryItemNowClear:hover {
+  background: linear-gradient(to bottom, #60a9f3, #2690fb);
+  color: $white
+}
+
+.openLotteryItemNowClear:active {
+  background: linear-gradient(to bottom, #60a9f3, #2690fb);
+  color: $white
+}
+
+.playContentBottomU {
+  height: 50%;
+  width: 100%;
+}
+
+.playResultAddUnit {
+  display: inline-block;
+  width: 132px;
+  height: 100%;
+  line-height: 40px;
+  flex-direction: column;
+  align-items: center;
+  float: left
+  margin-left: 20px;
+}
+.playAddBtn{
+  width:23px;
+  height:25px;
+  line-height:25px;
+  text-align :center;
+  border-radius :5px 0 0 5px;
+  display: inline-block;
+  border:1px solid rgba(255,255,255,0.85);
+  border-right:none;
+  cursor:pointer;
+}
+.playDecBtn{
+  width:23px;
+  height:25px;
+  line-height:25px;
+  text-align :center;
+  border-radius :0 5px 5px 0;
+  display: inline-block;
+  border:1px solid rgba(255,255,255,0.85);
+  border-left:none;
+  cursor:pointer;
+}
+.playInputContain{
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  border:1px solid rgba(255,255,255,0.85);
+}
+.textSelect{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.playResultAddMultiple {
+  display: inline-block;
+  width: 160px;
+  height: 100%;
+  line-height: 40px;
+  flex-direction: column;
+  align-items: center;
+  float: left
+  color: $font-white;
+}
+.playResultContainer{
+  width:206px;
+}
+
+.widthAuto {
+  width: auto;
+}
+
+.playResultInput {
+  background: none;
+  width: 50px;
+  height: 23px;
+  color: $font-white;
+  line-height :23px;
+  border:1px solid;
+  text-align :center;
+}
+/* 谷歌 */
+input.playResultInput::-webkit-outer-spin-button,
+input.playResultInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+/* 火狐 */
+input.playResultInput{
+  -moz-appearance:textfield;
+}
+.playResultText {
+  display: inline-block;
+  font-size: 12px
+}
+.quickBet{
+  float: left;
+  }
+.playInputContain .playResultInput{
+  border:none;
+}
+
+
+.playResultBtn {
+  background: none;
+  border: 1px solid $font-white;
+  height: 25px;
+  line-height: 25px;
+  margin-top -3px;
+  margin-left: 10px;
+  border-radius: 13px;
+  padding: 0 10px;
+  color: $font-white;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.playResultSelect {
+  background: $play-back-65;
+  color: $font-white;
+  border-radius: 3px;
+  height: 25px;
+  border: 1px solid rgba(34, 44, 56, 0.55);
+}
+
+.paddingResultNum {
+  font-size: 12px;
+}
+
+.playPadding {
+  padding-left: 20px;
+  font-size: 12px;
+}
+
+.playPadding > div {
+  margin-right: 10px
+}
+
+.onCancel {
+  background-color: $bottom-border
+}
+
+.resultBtn {
+  height: 32px;
+  border: none;
+  padding: 0 10px;
+  border-radius: 3px;
+  color: $white;
+  margin-right: 10px;
+  font-size: 15px;
+  line-height :32px;
+}
+
+.addNumBtn:hover{
+  background: linear-gradient(to bottom, #78f2ff, #3DCEDF);
+}
+.addNumBtn{
+  background:#3DCEDF;
+}
+.addCart{
+  background: #2AA0FC;
+}
+.addCart:hover {
+  background: linear-gradient(to bottom, #67b8f7, #2AA0FC);
+}
+
+.betNow:hover {
+  background: linear-gradient(to bottom, #ff9c72, #FF8624)!important;
+}
+.quickBetInput{
+  height: 32px;
+  background: transparent;
+  line-height: 32px;
+  padding: 0 10px;
+  border: 1px solid #eaeaea;
+  margin: -4px 10px 0 0;
+}
+.betNow {
+  background:#FF8624;
+}
+.betNowDisabled{
+  cursor: not-allowed!important;
+}
+
+//玩法样式
+//追号样式
+.chaseTitle {
+  width: 100%;
+  height: 45px;
+  border-bottom: 1px solid $bottom-border
+}
+
+.chaseTitle > div {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  float: left
+}
+
+.chaseTitle > :first-child {
+  vertical-align: middle;
+  text-align: left;
+  text-indent: 30px;
+  line-height: 55px;
+  font-size: 16px;
+}
+
+.chaseTabs {
+  padding: 10px 0 0;
+  height: 100%;
+}
+
+.chaseTabs > div {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+  line-height: 35px;
+  cursor: pointer
+}
+
+.chaseTabsSelect {
+  background-color: $font-blue
+}
+
+.chaseTabsNoSelect {
+  background-color: $play-back-85
+}
+
+.chaseTabLeft {
+  border-top-left-radius: 10px;
+}
+
+.chaseTabRight {
+  border-top-right-radius: 10px;
+}
+
+.chaseTable {
+  width: 100%;
+  height: 315px;
+}
+
+.chaseTableItem {
+  display: inline-block;
+  width: 120px;
+  height: 100%;
+  line-height: 40px;
+  flex-direction: column;
+  align-items: center;
+  float: left
+  color: $font-white;
+}
+
+.chaseInput {
+  width: 40px !important;
+}
+
+.chaseTableBody {
+  padding: 0 5%;
+  height: 235px;
+  overflow-y: auto
+}
+
+.chaseTR {
+  height: 35px;
+  background-color: $play-back-85;
+}
+
+.chaseTRTwo {
+  height: 35px;
+  line-height: 35px;
+  background-color: $play-back-65;
+}
+
+.winningPrize {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 25px;
+  padding-left: 15px;
+  font-size: 12px;
+  flex-direction: column;
+  align-items: center;
+  float: right;
+  color: $font-white;
+}
+
+.winningPrizeBody {
+  padding: 10px 0 0;
+}
+
+//追号样式
+//信用玩法
+.playCreditCard {
+  height: 50px;
+  line-height: 50px;
+}
+
+.creditLi {
+
+}
+
+.creditText {
+  display: inline-block;
+  height: 35px;
+  width: 15%;
+  line-height: 35px;
+  font-size: 16px;
+}
+
+.creditNum {
+  width: 85%;
+  float: left;
+  margin-top: 5px;
+}
+
+.creditNumBtn {
+  height: 30px;
+  display: inline-block;
+  line-height: 30px;
+  padding: 0 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer
+}
+
+.playCreditDetail {
+  height: 350px;
+  overflow-y: auto
+}
+
+//信用玩法
+//热门活动
+.activityBody {
+  height: 265px;
+}
+
+.activityBodyDetail {
+  height: 205px;
+  padding: 0 3px;
+}
+.activity-div {
+  height: 205px;
+  position: relative;
+  background-color:$play-back-op
+}
+
+.imgBodyP {
+  width: 2004px;
+  height: 145px;
+  position: absolute;
+  z-index: 9;
+}
+
+.imgBodyItem {
+  width: 334px;
+  height: 145px;
+  cursor: pointer;
+}
+
+.preBtn {
+  position: absolute;
+  top: 45px;
+  z-index: 20;
+  height: 50px;
+  line-height: 50px;
+  width: 25px;
+  background: rgba(34,44,56,0.45);
+  cursor: pointer;
+  font-size: 22px;
+  color: rgba(255,255,255,0.55);}
+
+.preImg {
+  width: 100%
+}
+
+.activityText {
+  position: absolute;
+  top: 150px;
+  height: 40px;
+  line-height: 18px;
+  width: 334px;
+  font-size: 12px;
+  text-align: left;
+  -webkit-transform: scale(0.90);
+  transform: scale(0.9);
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.activityHref {
+  position: absolute;
+  top: 185px;
+  height: 20px;
+  line-height: 18px;
+  width: 334px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.activityHrefItem {
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  border: 1px solid $font-white;
+  margin-right: 5px;
+  cursor: pointer
+}
+
+//热门活动
+//路子图
+.Luzitu-body {
+  padding: 5px
+}
+
+.Luzitu-title {
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+}
+
+.luzitu-Select {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.lzt-option-container {
+  width: 65%
+}
+
+.luzitu-Switch {
+  width: auto;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0 auto;
+  display: table;
+  float: none;
+  height: 25px;
+  line-height: 25px;
+}
+
+.luzitu-item {
+  display: inline-block;
+  width: 38px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 2px;
+  color: #dadada;
+  float: left;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer
+}
+
+.luzitu-item-active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #000;
+}
+
+.lzt-circle {
+  width: 20%;
+  float: right;
+  height: 30px;
+}
+
+.luzitu-header .lzt-circle .circle {
+  margin: 3px 5px 0 5px;
+}
+
+.luzitu-header .lzt-circle div {
+  float: right;
+}
+
+.lzt-circle-item {
+  height: 25px;
+  line-height: 25px;
+  margin-left: 5px;
+}
+
+.circle {
+  border-radius: 50px;
+  border: 3px solid #036ab1;
+  width: 18px;
+  line-height: 18px;
+  text-align: center;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.luzitu-content {
+  height: 160px;
+  width: 601px;
+  margin: 3px 0 0 7px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.luzitu-li {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  float: left;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.luzitu-wron {
+  display: none;
+  position: absolute;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px 0 #666;
+  min-width: 60px;
+  line-height: 20px;
+  height: 20px;
+  background-color: $white;
+  color: $black;
+  z-index: 999;
+}
+
+.luzitu-li:hover .luzitu-wron {
+  display: block;
+}
+
+//路子图
+//弹窗样式
+.betModal-height{
+  height :40px;
+  width :100%
+}
+.betModal-wrap {
+  height: 50px;
+  width: 100%;
+  font-size: 14px;
+  color: #fff;
+  text-align: left;
+  line-height: 50px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+//弹窗样式
+
+//立即投追提示框
+.confirmLotteryName{
+  height:30px;
+  line-height :30px;
+}
+.confirmLotteryValue{
+  height:30px;
+  line-height:30px;
+}
+.confirmLotteryTitle{
+  margin-bottom :10px;
+}
+.confirmLotteryLabel{
+  height:30px;
+  line-height:30px;
+  margin-right :20px;
+}
+.confirmLotteryValue{
+  height:30px;
+  line-height:30px;
+}
+.markSixType1 td{
+  width:35px;
+  height:28px;
+  display:inline-block;
+  line-height:26px;
+  border:1px solid #25313E!important;
+}
+.playSubmitModel{
+  border-top:1px solid #BCC2C9;
+  padding:5px 0;
+  position:relative;
+}
+.PlayCloseModal {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(34, 44, 56, 0.9);
+  z-index: 9;
+  line-height: 80px;
+  font-size: 24px;
+}
+@keyframes redPacketMessageAnimate{
+    0%{
+      transform:rotateZ(0deg) scale(0)
+    }
+     25%{
+       transform:rotateZ(-30deg) scale(1)
+     }
+     50%{
+       transform:rotateZ(0deg) scale(1.5)
+     }
+     75%{
+       transform:rotateZ(30deg) scale(2)
+     }
+     100%{
+       transform:rotateZ(0deg) scale(1)
+     }
+
+}
+.redPacketMessage{
+  -webkit-animation: redPacketMessageAnimate 1s
+  -o-animation: redPacketMessageAnimate 1s
+  animation: redPacketMessageAnimate 1s
+}
+.openRedPacket{
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  border-radius: 100px;
+  background-color: #EBCD97;
+  border-color: transparent;
+  font-size: 17px;
+  font-weight: 500;
+}
+.openRedPacket:active{
+  opacity :0.7;
+}
+.onlineStatus{
+  width:20px;
+  height:20px;
+  background-color:#00CD66;
+  border-radius:100%;
+  display: inline-block;
+}
+.selectTypeContent{
+  width:100%;
+  height:30px;
+}
+.selectTypeItem{
+  width:100px;
+  height:30px;
+  text-align: center;
+  line-height 30px;
+  float: left;
+  border-top:1px solid #222c38;
+  border-right:1px solid #222c38;
+  cursor: pointer;
+}
+.lhc_quick_bet_title{
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+.lhc_quick_bet{
+  text-align: center;
+}
+.lhc_quick_bet li {
+   width: 192px;
+   margin: 0 10px;
+   display: inline-block;
+ }
+.lhc_quick_bet li a {
+  float: left;
+  width: 40px;
+  padding: 5px 0px;
+  margin: 2px 3px;
+  font-size: 13px;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+  outline: 0;
+  background-color :#FFF;
+}
+.lhc_quick_bet li a:hover{
+  background: #ffbe65!important;
+  color:#FFF;
+}

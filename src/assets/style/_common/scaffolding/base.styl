@@ -1,6 +1,7 @@
 body {
-  //避免将页面缩太小导致布局混乱
+//避免将页面缩太小导致布局混乱
   min-width: 1280px;
+  min-height: 800px;
   font-size: $font-size-default;
   font-family: $font-default;
   line-height: $line-height-base;
@@ -8,7 +9,7 @@ body {
   color: $text-color;
 }
 
-*{
+* {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -16,74 +17,214 @@ body {
   margin: 0;
 }
 
-html{
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+//初始化
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-h6, .h6 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 0.9em;
-  font-weight: 500;
-  line-height: 1.5em;
-  text-transform: uppercase;
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
+body {
+  color: #333;
+  font-size: 12px;
+  font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "SimSun";
+}
 
+ul, ol {
+  list-style-type: none;
+}
 
-//Basic A Link Style
+select, input, img, select {
+  vertical-align: middle;
+}
+
+input {
+  outline: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
 
 a {
-  color: $link-color;
   text-decoration: none;
 }
 
-
-//将display值语义化
-
-.hide{
-  display :none;
+a:link {
+  color: #009;
 }
 
+li {
+  list-style-type: none;
+}
+
+a:visited {
+  color: #800080;
+}
+
+a:hover, a:active, a:focus {
+  color: #c00;
+  text-decoration: underline;
+}
+
+input::-webkit-input-placeholder {
+  color: $bottom-border
+}
+
+button {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer
+}
+
+img[src=""] {
+  opacity: 0;
+}
+
+table tr th {
+  font-weight: 300;
+}
+
+//语义话
+.mr10 {
+  margin-bottom: 10px;
+}
+.img-set{
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+}
+.mr20 {
+  margin-bottom: 20px;
+}
+
+.mr30 {
+  margin-bottom: 30px;
+}
+
+.mr40 {
+  margin-bottom: 40px;
+}
+
+.pd3 {
+  padding: 0 3px
+}
+
+.pd10 {
+  padding: 0 10px
+}
+
+.pd20 {
+  padding: 0 20px
+}
+a:visited {
+  color:none;
+}
+a:link {
+  color: none;
+}
+.clearFloat {
+  overflow: hidden;
+}
+
+.clearBoth {
+  clear: both
+}
+.clear-fix:after{
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.textRight {
+  text-align: right
+}
+
+.textCenter {
+  text-align: center
+}
+
+.relative {
+  position: relative;
+}
+
+.textLeft {
+  text-align: left
+}
+
+.centerAll {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.border-radius5 {
+  border-radius: 5px
+}
+
+.right {
+  float: right
+}
+
+.left {
+  float: left
+}
+
+.fontSize12 {
+  font-size: 12px
+}
+
+.fontSize14 {
+  font-size: 14px
+}
+.fontSize16 {
+  font-size: 16px
+}
+.fontSize20{
+  font-size:20px;
+}
 
 .inline-block {
-  display: inline-block;
+  display: inline-block
 }
 
-
-//将float值语义化
-.right{
-  float: right;
+.fontColor {
+  color: $orange;
+  font-size :14px;
+}
+.letter1 {
+  letter-spacing: 1px;
+}
+.letter5{
+  letter-spacing: 5px;
 }
 
-.left{
-  float: left;
+.width100 {
+  width: 100%;
 }
-
-
-//将color值语义化
-.text-danger {
-  color: #f44336;
+.hei100 {
+  height: 100%;
 }
-
-
-//将常用的mr值语义化
-.mr10{
-  margin-right: 10px;
+.width-30{
+  width: 30%;
+  height: 100%;
+  text-align: center
 }
-
-
-//title类型的action样式风格
-.title-action{
-  float: right;
-  font-size: 14px;
-  color: #000;
-  margin-top: 5px;
-  margin-left: 10px;
+.width-70{
+  width: 70%;
+  height: 100%;
+  text-align: center
 }
-
-
