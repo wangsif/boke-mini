@@ -18,7 +18,8 @@ class LchStore {
                 data: List(),
                 total: 0,
                 pageNo: 1,
-                pageSize: 10
+                pageSize: 10,
+                totalMoney:""
             }),
             editModal: {
                 show: false

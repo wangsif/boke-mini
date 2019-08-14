@@ -12,32 +12,37 @@ import LchStore from "store/LchStore";
 import LchAction from  "action/LchAction";
 
 class Type1 extends React.Component{
-    state = {
-        data:[],
-        col:10,
-        red:[1,2,7,8,12,13,18,19,23,24,29,30,34,35,40,45,46],
-        bule:[3,4,9,10,14,15,20,25,26,31,36,37,41,42,47,48],
-        green:[5,6,11,16,17,21,22,27,28,32,33,38,39,43,44,49],
-        numCount:49,
-        betMoney:0,
-        fixRebate:0,//用户固定返点
-        rebate: 0,//返点
-        pointList:[],
-        betNumber: 0,
-        maxFd:0, //最大返点
-        hjOdds:0,
-        lotteryVisible: false,
-        average:0,
-        afterLotteryBetData:{
-            expect: "",
-            betNumber: "",
-            betMoney: "",
-        },
-        quickBet:false,
-        clearState:false,
-        quickBetMoney:0,
-        betNum:0
+    constructor(props) {
+        super(props);
+        this.state = {
+            data:[],
+            col:10,
+            red:[1,2,7,8,12,13,18,19,23,24,29,30,34,35,40,45,46],
+            bule:[3,4,9,10,14,15,20,25,26,31,36,37,41,42,47,48],
+            green:[5,6,11,16,17,21,22,27,28,32,33,38,39,43,44,49],
+            numCount:49,
+            betMoney:0,
+            fixRebate:0,//用户固定返点
+            rebate: 0,//返点
+            pointList:[],
+            betNumber: 0,
+            maxFd:0, //最大返点
+            hjOdds:0,
+            lotteryVisible: false,
+            average:0,
+            totalMoney:"",
+            afterLotteryBetData:{
+                expect: "",
+                betNumber: "",
+                betMoney: "",
+            },
+            quickBet:false,
+            clearState:false,
+            quickBetMoney:0,
+            betNum:0
+        }
     }
+
     // k 当前列数
     // len 总列数
     _getTableData = (k,len,datas)=>{
@@ -330,7 +335,7 @@ class Type1 extends React.Component{
     };
     render(){
         let {currentPlayData, lchData, lotteryReturnMsg, oddsJson} = this.props;
-        let {afterLotteryBetData,quickBet,clearState,quickBetMoney,betNum,average} = this.state;
+        let {afterLotteryBetData,quickBet,clearState,quickBetMoney,betNum,totalMoney} = this.state;
         //let currentLotteryName = currentPlayData.get('currentLotteryName');//大彩种名称
         let {data,betMoney,rebate,pointList} =  this.state;
         let len = Math.ceil(this.state.numCount / this.state.col);
@@ -346,6 +351,7 @@ class Type1 extends React.Component{
         // let {purchaseHjOdds} = lhc;
         // let {lhc_credit_tm} = purchaseHjOdds;
         console.log(lchData.get('total'))
+        console.log(this.props)
         return (
             <div className = 'markSixType1' style={{background:'#00A7B0' }}>
                 <div className="selectTypeContent">
@@ -368,26 +374,38 @@ class Type1 extends React.Component{
                                         {
                                             items.map((item,i)=>{
                                                 // console.log(lchData.get('data').get(item.name-1))
-                                                // console.log(item.name)
-                                                console.log(len)
-                                                let out = lchData.get('data').get(item.name-1).totalMoney;
-                                                //console.log(k)
-                                                return (
-                                                    <tr key = {i} onClick={quickBet?this.betHandle.bind(this,k,i):null}>
+                                                 //console.log(item.name)
+                                                //console.log(len)
+                                                let out = 0;
+                                                if (lchData.get('data').get(item.name-1)!=undefined){
+                                                    out = lchData.get('data').get(item.name-1).totalMoney;
+                                                }
+                                                if (lchData.get('data').get(item.name-1)!=undefined){
+                                                    return (
+                                                        <tr key = {i} onClick={quickBet?this.betHandle.bind(this,k,i):null}>
 
-                                                        <td style = {Object.assign({},style.TableContent,{width:'50%'},item.check&&quickBet?{backgroundColor:"#ffbe65"}:null)}>
-                                                            <span style = {this._getContentNumStyle(item.name)}>&nbsp;{item.name}</span>
-                                                        </td>
-                                                        {/*<td style = {Object.assign({},style.TableContent,{width:'25%'})}>{item.odds}</td>*/}
-                                                        {/*<td style = {Object.assign({},style.TableContent,{width:'25%'})}>{lhc_credit_tm}</td>*/}
-                                                        {/*{quickBet?<td style = {Object.assign({},style.TableContent,{width:'40%'},item.check?{backgroundColor:"#ffbe65"}:null)}>{"48"}</td>:<td style = {Object.assign({},style.TableContent,{width:'40%'})}><input style = {{width:'90%',height:'90%',overflow: 'visible',color:'red' ,background: "transparent", border: "1px solid #eaeaea",textIndent: "6px"}} className="betInput"  onChange = {(e)=>{*/}
+                                                            <td style = {Object.assign({},style.TableContent,{width:'50%'},item.check&&quickBet?{backgroundColor:"#ffbe65"}:null)}>
+                                                                <span style = {this._getContentNumStyle(item.name)}>&nbsp;{item.name}</span>
+                                                            </td>
+                                                            {/*<td style = {Object.assign({},style.TableContent,{width:'25%'})}>{item.odds}</td>*/}
+                                                            {/*<td style = {Object.assign({},style.TableContent,{width:'25%'})}>{lhc_credit_tm}</td>*/}
+                                                            {/*{quickBet?<td style = {Object.assign({},style.TableContent,{width:'40%'},item.check?{backgroundColor:"#ffbe65"}:null)}>{"48"}</td>:<td style = {Object.assign({},style.TableContent,{width:'40%'})}><input style = {{width:'90%',height:'90%',overflow: 'visible',color:'red' ,background: "transparent", border: "1px solid #eaeaea",textIndent: "6px"}} className="betInput"  onChange = {(e)=>{*/}
                                                             {/*this._TableInputChange(i,k,e)*/}
-                                                        {/*}} value = {item.money}*/}
-                                                                                                                                                                                                                                                                            {/*placeholder={`赔:  ${"48"}`}*/}
-                                                        {/*></input></td>}*/}
-                                                        {out > meanData ? <td style={{width:'50%', backgroundColor:"#A81300"}}> &nbsp;&nbsp;&nbsp;{lchData.get('data').get(item.name-1).totalMoney}</td> : <td style={{width:'50%'}}> &nbsp;&nbsp;&nbsp;{lchData.get('data').get(item.name-1).totalMoney}</td>}
-                                                    </tr>
-                                                )
+                                                            {/*}} value = {item.money}*/}
+                                                            {/*placeholder={`赔:  ${"48"}`}*/}
+                                                            {/*></input></td>}*/}
+
+
+                                                            {out > meanData ? <td style={{
+                                                                    width: '50%',
+                                                                    backgroundColor: "#A81300"
+                                                                }}> &nbsp;&nbsp;&nbsp;{lchData.get('data').get(item.name - 1).totalMoney}</td> :
+                                                                <td style={{width: '50%'}}> &nbsp;&nbsp;&nbsp;{lchData.get('data').get(item.name - 1).totalMoney}</td>}
+
+                                                        </tr>
+                                                    )
+                                                }
+
                                             })
                                         }
 
